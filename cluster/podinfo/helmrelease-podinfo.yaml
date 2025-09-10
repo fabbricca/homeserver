@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: podinfo # Must be the same as the upstream chart name
-      version: 10.x # Pin to semver major versions to avoid breaking changes but still get bugfixes/updates
+      version: 6.9 # Pin to semver major versions to avoid breaking changes but still get bugfixes/updates
       sourceRef:
         kind: HelmRepository
         name: podinfo # References the HelmRepository you created earlier
