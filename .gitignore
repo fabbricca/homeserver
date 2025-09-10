@@ -3,3 +3,4 @@ talosconfig
 .terraform.lock.hcl
 .terraform/
 age.key
+.directory
