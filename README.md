@@ -47,3 +47,10 @@ cilium install \
 kubectl create ns cilium-test-1 && kubectl label ns cilium-test-1 pod-security.kubernetes.io/enforce=privileged pod-security.kubernetes.io/warn=privileged pod-security.kubernetes.io/audit=privileged --overwrite
 
 cilium connectivity test 
+
+
+# Cluster
+
+## Secret
+kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=./age.key
+
