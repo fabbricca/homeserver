@@ -24,3 +24,5 @@ spec:
             backend:
               service:
                 name: jellyfin
+                port:
+                  number: 80
