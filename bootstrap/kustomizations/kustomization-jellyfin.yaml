@@ -7,10 +7,13 @@ spec:
   interval: 15m
   path: ./cluster/jellyfin
   prune: true
-  timeout: 2m
+  timeout: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
+  dependsOn:
+    - name: ingress-nginx
+      namespace: flux-system
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
