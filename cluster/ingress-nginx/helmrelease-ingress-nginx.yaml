@@ -4,6 +4,13 @@ metadata:
   name: ingress-nginx
   namespace: ingress-nginx
 spec:
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
   chart:
     spec:
       chart: ingress-nginx
@@ -17,11 +24,19 @@ spec:
   timeout: 5m
   values:
     controller:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
+      # hostNetwork removed for Cilium
+      dnsPolicy: ClusterFirst
       replicaCount: 2
+      publishService:
+        enabled: true
       service:
         type: LoadBalancer
+        externalTrafficPolicy: Local
+        annotations:
+          # If using MetalLB:
+          metallb.universe.tf/address-pool: default
+          # If instead using Cilium LB IPAM, comment the above and optionally:
+          # io.cilium/lb-ipam-ips: "10.0.0.50"
       metrics:
         enabled: true
       admissionWebhooks:
