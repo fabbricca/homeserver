@@ -16,25 +16,6 @@ This repository is the single source of truth for a Talos-based Kubernetes clust
 * Layered concerns: Infra → OS bootstrap → Cluster add‑ons → Applications.
 * Reproducibility: Rebuild from scratch with only secrets + this repo + backups.
 
-### High-Level Stack
-```
-┌────────────────────────────────────────────────────────┐
-│                    Users / Clients                     │
-└──────────────▲──────────────────────────▲──────────────┘
-         │                          │
-     Ingress (NGINX)             (Future: Gateway API)
-         │
-     Cert-Manager + ACME (Let's Encrypt wildcard)
-         │
-     Cilium CNI  + (MetalLB | Cilium LB IPAM)  
-         │
-    RWX Storage (NFS CSI)  |  Cluster Services (Secrets, etc)
-         │
-        Talos Kubernetes Control / Worker Nodes
-         │
-        Bare Metal Hardware + NFS Host + UPS
-```
-
 ---
 
 ## 2. Hardware Inventory
