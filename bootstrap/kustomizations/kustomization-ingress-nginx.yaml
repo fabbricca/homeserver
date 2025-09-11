@@ -1,11 +1,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: nginx-ingress-controller
+  name: ingress-nginx
   namespace: flux-system
 spec:
   interval: 15m
-  path: cluster/nginx-ingress-controller
+  path: cluster/ingress-nginx
   prune: true
   timeout: 2m
   sourceRef:
@@ -14,5 +14,5 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
-      name: ingress-nginx-controller
-      namespace: nginx-ingress-controller
+      name: ingress-nginx
+      namespace: ingress-nginx
