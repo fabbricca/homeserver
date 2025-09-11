@@ -24,6 +24,7 @@ spec:
   timeout: 5m
   values:
     controller:
+      fullnameOverride: ingress-nginx
       # hostNetwork removed for Cilium
       dnsPolicy: ClusterFirst
       replicaCount: 2
