@@ -34,3 +34,17 @@ spec:
                 name: studio
                 port:
                   number: 4000
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: platform
+                port:
+                  number: 4000
+          - path: /sync
+            pathType: Prefix
+            backend:
+              service:
+                name: sync
+                port:
+                  number: 4000
