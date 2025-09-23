@@ -19,4 +19,4 @@ spec:
               service:
                 name: studio
                 port:
-                  number: 80
+                  number: 4000
