@@ -5,26 +5,17 @@ metadata:
   namespace: agnost
   annotations:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      # Preserve original external prefix for apps that read it
-      proxy_set_header X-Forwarded-Prefix /studio;
-    # If Studio ever needs websocket upgrades:
-    # nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-    # nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
 spec:
   ingressClassName: nginx
   tls:
     - secretName: letsencrypt-wildcard-cert
       hosts:
-        - studio.iberu.me
+        - agnost.iberu.me
   rules:
-    - host: studio.iberu.me
+    - host: agnost.iberu.me
       http:
         paths:
-          # Path with /studio prefix (handles current redirects that include /studio/...)
-          - path: /studio(/|$)(.*)
+          - path: /studio
             pathType: Prefix
             backend:
               service:
@@ -38,7 +29,3 @@ spec:
                 name: studio
                 port:
                   number: 4000
-# NOTE:
-# We moved from path-based (/studio on agnost.iberu.me) to a dedicated host (studio.iberu.me)
-# to avoid OAuth callback & cookie path issues. If you still need backward compatibility,
-# you can re-add a second rule for agnost.iberu.me with path /studio and optionally a 301 redirect.
