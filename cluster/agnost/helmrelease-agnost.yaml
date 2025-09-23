@@ -28,3 +28,23 @@ spec:
       certManager:
         namespace: cert-manager
         serviceAccountName: cert-manager
+    mongodb:
+      persistence:
+        enabled: true
+        storageClass: nfs-csi
+        size: 10Gi
+    redis:
+      persistence:
+        enabled: true
+        storageClass: nfs-csi
+        size: 5Gi
+    registry:
+      persistence:
+        enabled: true
+        storageClass: nfs-csi
+        size: 20Gi
+    minio:
+      persistence:
+        enabled: true
+        storageClass: nfs-csi
+        size: 50Gi
