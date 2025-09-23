@@ -10,9 +10,8 @@ spec:
   chart:
     spec:
       chart: base
-      version: 1.0.10
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: agnost
         namespace: flux-system
       interval: 30m

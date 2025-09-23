@@ -1,8 +1,10 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+kind: GitRepository
 metadata:
   name: agnost
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://cloud-agnost.github.io/agnost-gitops-charts/
+  url: https://github.com/cloud-agnost/agnost-gitops-charts
+  ref:
+    branch: main
