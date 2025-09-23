@@ -5,6 +5,18 @@ metadata:
   namespace: agnost
   annotations:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      # Ensure original scheme/host are forwarded so app constructs correct absolute URLs
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header X-Forwarded-Port $server_port;
+      proxy_set_header X-Forwarded-Host $host;
+      proxy_set_header X-Forwarded-Prefix /studio;
+      # Force canonical host (protect against alternate tunnel hostnames)
+      if ($host != "agnost.iberu.me") {
+        return 301 https://agnost.iberu.me$request_uri;
+      }
+      # If upstream returns http Location headers for /studio, rewrite to https
+      proxy_redirect http://agnost.iberu.me/studio/ https://agnost.iberu.me/studio/;
 spec:
   ingressClassName: nginx
   tls:
@@ -16,13 +28,6 @@ spec:
       http:
         paths:
           - path: /studio
-            pathType: Prefix
-            backend:
-              service:
-                name: studio
-                port:
-                  number: 4000
-          - path: /
             pathType: Prefix
             backend:
               service:
