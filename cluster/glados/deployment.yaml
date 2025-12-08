@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: glados-proxy
-        image: glados-proxy:latest
+        image: fabbricca/glados-proxy:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5555
