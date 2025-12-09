@@ -17,7 +17,7 @@ spec:
     newtInstances:
       - name: main-tunnel
         auth:
-          secret:
+          existingSecret:
             name: newt-credentials
             keys:
               endpointKey: PANGOLIN_ENDPOINT
