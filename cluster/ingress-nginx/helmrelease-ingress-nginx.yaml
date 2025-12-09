@@ -37,7 +37,7 @@ spec:
         externalTrafficPolicy: Local
         annotations:
           # If using MetalLB:
-          metallb.universe.tf/address-pool: default
+          metallb.universe.tf/address-pool: ip-pool
           # If instead using Cilium LB IPAM, comment the above and optionally:
           # io.cilium/lb-ipam-ips: "10.0.0.50"
       metrics:
