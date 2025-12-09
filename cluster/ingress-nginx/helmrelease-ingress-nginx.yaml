@@ -23,6 +23,8 @@ spec:
   interval: 15m
   timeout: 5m
   values:
+    tcp:
+      12345: "glados/glados-proxy:5555"
     controller:
       fullnameOverride: ingress-nginx
       # hostNetwork removed for Cilium
