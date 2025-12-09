@@ -33,13 +33,13 @@ spec:
           limits:
             memory: "64Mi"
             cpu: "100m"
-        livenessProbe:
-          tcpSocket:
-            port: 5555
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        readinessProbe:
-          tcpSocket:
-            port: 5555
-          initialDelaySeconds: 2
-          periodSeconds: 5
+#        livenessProbe:
+#          tcpSocket:
+#            port: 5555
+#          initialDelaySeconds: 5
+#          periodSeconds: 10
+#        readinessProbe:
+#          tcpSocket:
+#            port: 5555
+#          initialDelaySeconds: 2
+#          periodSeconds: 5
