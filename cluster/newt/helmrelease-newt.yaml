@@ -13,27 +13,13 @@ spec:
         kind: HelmRepository
         name: fossorial
         namespace: flux-system
-  valuesFrom:
-    - kind: Secret
-      name: newt-credentials
-      valuesKey: PANGOLIN_ENDPOINT
-      targetPath: newtInstances[0].auth.keys.endpointKey
-    - kind: Secret
-      name: newt-credentials
-      valuesKey: NEWT_ID
-      targetPath: newtInstances[0].auth.keys.idKey
-    - kind: Secret
-      name: newt-credentials
-      valuesKey: NEWT_SECRET
-      targetPath: newtInstances[0].auth.keys.secretKey
   values:
     newtInstances:
       - name: main-tunnel
+        enabled: true
         auth:
-          keys:
-            endpointKey: ""  # Overridden by valuesFrom
-            idKey: ""        # Overridden by valuesFrom
-            secretKey: ""    # Overridden by valuesFrom
+          existingSecretName: newt-credentials
+          # Keys match the default: PANGOLIN_ENDPOINT, NEWT_ID, NEWT_SECRET
         upstream:
           # Pointing to the Ingress Controller to handle both HTTP (Jellyfin) and TCP (Glados)
           url: "http://ingress-nginx-ingress-nginx-controller.ingress-nginx.svc.cluster.local"
