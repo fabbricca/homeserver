@@ -29,6 +29,11 @@ spec:
   values:
     newtInstances:
       - name: main-tunnel
+        auth:
+          keys:
+            endpointKey: ""  # Overridden by valuesFrom
+            idKey: ""        # Overridden by valuesFrom
+            secretKey: ""    # Overridden by valuesFrom
         upstream:
           # Pointing to the Ingress Controller to handle both HTTP (Jellyfin) and TCP (Glados)
           url: "http://ingress-nginx-ingress-nginx-controller.ingress-nginx.svc.cluster.local"
