@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: ingress-nginx
@@ -24,7 +24,7 @@ spec:
   timeout: 5m
   values:
     tcp:
-      12345: "glados/glados-proxy:5555"
+      "12345": "glados/glados-proxy:5555"
     controller:
       fullnameOverride: ingress-nginx
       # hostNetwork removed for Cilium
