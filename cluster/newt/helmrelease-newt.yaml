@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: newt
-      version: "0.1.0" # We will let Flux find the latest version or you can specify one if known
+      version: "*"
       sourceRef:
         kind: HelmRepository
         name: fossorial
