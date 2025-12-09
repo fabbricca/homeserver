@@ -1,0 +1,27 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: newt
+  namespace: newt
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: newt
+      version: "0.1.0" # We will let Flux find the latest version or you can specify one if known
+      sourceRef:
+        kind: HelmRepository
+        name: fossorial
+        namespace: flux-system
+  values:
+    newtInstances:
+      - name: main-tunnel
+        auth:
+          existingSecret: newt-credentials
+          keys:
+            endpointKey: PANGOLIN_ENDPOINT
+            idKey: NEWT_ID
+            secretKey: NEWT_SECRET
+        upstream:
+          # Pointing to the Ingress Controller to handle both HTTP (Jellyfin) and TCP (Glados)
+          url: "http://ingress-nginx-ingress-nginx-controller.ingress-nginx.svc.cluster.local"
