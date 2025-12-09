@@ -35,7 +35,7 @@ spec:
                   name: newt-credentials
                   key: NEWT_SECRET
             - name: JELLYFIN_UPSTREAM
-              value: "http://ingress-nginx-ingress-nginx-controller.ingress-nginx.svc.cluster.local"  # adjust port if svc.port != 8096
+              value: "http://jellyfin.media.svc.cluster.local:8096"  # adjust port if svc.port != 8096
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
