@@ -20,5 +20,3 @@ spec:
       kind: HelmRelease
       name: newt
       namespace: newt
-      name: newt-tunnel
-      namespace: newt
