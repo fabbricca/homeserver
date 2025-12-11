@@ -20,5 +20,7 @@ spec:
       containers:
       - name: frontend
         image: fabbricca/glados-web-frontend:latest
+        command: ["/bin/sh", "-c"]
+        args: ["chmod -R 755 /usr/share/nginx/html && nginx -g 'daemon off;'"]
         ports:
         - containerPort: 80
