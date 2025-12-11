@@ -11,10 +11,10 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - glados.iberu.me
+    - ai.iberu.me
     secretName: glados-tls
   rules:
-  - host: glados.iberu.me
+  - host: ai.iberu.me
     http:
       paths:
       - path: /
