@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: glados-web-frontend
+  namespace: glados
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: glados-web-frontend
+  template:
+    metadata:
+      labels:
+        app: glados-web-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: iberu/glados-web-frontend:latest
+        ports:
+        - containerPort: 80

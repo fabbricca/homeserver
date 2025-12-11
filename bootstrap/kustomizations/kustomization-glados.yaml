@@ -16,3 +16,11 @@ spec:
       kind: Deployment
       name: glados-proxy
       namespace: glados
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: glados-websocket-bridge
+      namespace: glados
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: glados-web-frontend
+      namespace: glados

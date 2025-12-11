@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: glados-websocket-bridge
+  namespace: glados
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: glados-websocket-bridge
+  template:
+    metadata:
+      labels:
+        app: glados-websocket-bridge
+    spec:
+      containers:
+      - name: bridge
+        image: iberu/glados-websocket-bridge:latest
+        ports:
+        - containerPort: 8765
+        envFrom:
+        - configMapRef:
+            name: glados-websocket-bridge-config

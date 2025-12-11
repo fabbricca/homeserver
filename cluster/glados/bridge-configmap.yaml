@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: glados-websocket-bridge-config
+  namespace: glados
+data:
+  GLADOS_HOST: "glados-proxy"
+  GLADOS_PORT: "5555"
+  SERVER_PORT: "8765"
