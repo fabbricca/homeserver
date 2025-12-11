@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: bridge
-        image: iberu/glados-websocket-bridge:latest
+        image: fabbricca/glados-websocket-bridge:latest
         ports:
         - containerPort: 8765
         envFrom:

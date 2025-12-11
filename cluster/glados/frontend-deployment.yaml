@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: iberu/glados-web-frontend:latest
+        image: fabbricca/glados-web-frontend:latest
         ports:
         - containerPort: 80
