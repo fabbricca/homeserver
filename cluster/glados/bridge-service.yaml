@@ -7,6 +7,11 @@ spec:
   selector:
     app: glados-websocket-bridge
   ports:
-  - protocol: TCP
+  - name: websocket
+    protocol: TCP
     port: 8765
     targetPort: 8765
+  - name: api
+    protocol: TCP
+    port: 8766
+    targetPort: 8766

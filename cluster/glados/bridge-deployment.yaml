@@ -19,6 +19,7 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8765
+        - containerPort: 8766
         envFrom:
         - configMapRef:
             name: glados-websocket-bridge-config
