@@ -1,0 +1,43 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cognitia-ingress
+  namespace: cognitia
+  labels:
+    app.kubernetes.io/name: cognitia
+    app.kubernetes.io/part-of: cognitia
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/websocket-services: "cognitia-api"
+    nginx.ingress.kubernetes.io/upstream-hash-by: "$remote_addr"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - ai.iberu.me
+        - cognitia.iberu.me
+      secretName: cognitia-tls
+  rules:
+    - host: ai.iberu.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cognitia-api
+                port:
+                  number: 8000
+    - host: cognitia.iberu.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cognitia-api
+                port:
+                  number: 8000

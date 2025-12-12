@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cognitia
+  labels:
+    app.kubernetes.io/name: cognitia
+    app.kubernetes.io/part-of: cognitia

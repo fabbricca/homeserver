@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: glados-proxy-config
-  namespace: glados
-data:
-  # Change this to your GPU server's IP address
-  GLADOS_TARGET: "10.0.0.15:5555"

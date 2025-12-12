@@ -1,0 +1,18 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cognitia
+  namespace: flux-system
+spec:
+  interval: 3m
+  path: cluster/cognitia
+  prune: true
+  timeout: 2m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: cognitia-api
+      namespace: cognitia
