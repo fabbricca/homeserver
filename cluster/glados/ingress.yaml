@@ -24,6 +24,13 @@ spec:
             name: glados-web-frontend
             port:
               number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: glados-websocket-bridge
+            port:
+              number: 8765
       - path: /ws
         pathType: Prefix
         backend:
