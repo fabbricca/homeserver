@@ -16,6 +16,7 @@ spec:
       containers:
       - name: bridge
         image: fabbricca/glados-websocket-bridge:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8765
         envFrom:
