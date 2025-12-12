@@ -4,7 +4,7 @@ metadata:
   name: glados
   namespace: flux-system
 spec:
-  interval: 15m
+  interval: 3m
   path: cluster/glados
   prune: true
   timeout: 2m
