@@ -17,20 +17,9 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - ai.iberu.me
         - cognitia.iberu.me
       secretName: cognitia-tls
   rules:
-    - host: ai.iberu.me
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: cognitia-api
-                port:
-                  number: 8000
     - host: cognitia.iberu.me
       http:
         paths:
