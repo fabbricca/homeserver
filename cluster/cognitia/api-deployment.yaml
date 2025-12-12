@@ -47,8 +47,6 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /app/data
-            - name: web
-              mountPath: /app/web
           resources:
             requests:
               cpu: 50m
@@ -70,7 +68,5 @@ spec:
             periodSeconds: 10
       volumes:
         - name: data
-          emptyDir: {}
-        - name: web
           emptyDir: {}
       restartPolicy: Always
