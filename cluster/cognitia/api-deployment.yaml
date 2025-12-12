@@ -19,10 +19,22 @@ spec:
         app.kubernetes.io/component: api
         app.kubernetes.io/part-of: cognitia
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: api
           image: fabbricca/cognitia-api:latest
           imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: false
           ports:
             - name: http
               containerPort: 8000
