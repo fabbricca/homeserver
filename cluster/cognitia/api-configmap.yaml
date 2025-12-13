@@ -8,18 +8,21 @@ metadata:
     app.kubernetes.io/component: api
     app.kubernetes.io/part-of: cognitia
 data:
-  # Backend GPU server connection
-  COGNITIA_BACKEND_HOST: "10.0.0.15"
-  COGNITIA_BACKEND_PORT: "5555"
-  # API settings
-  API_HOST: "0.0.0.0"
-  API_PORT: "8000"
+  # Core connection (GPU server)
+  COGNITIA_CORE_URL: "http://10.0.0.15:8080"
+  # Ollama for text-only fallback mode
+  OLLAMA_URL: "http://10.0.0.15:11434"
+  OLLAMA_MODEL: "hf.co/bartowski/NousResearch_Hermes-4-14B-GGUF:latest"
+  # Server settings
+  HOST: "0.0.0.0"
+  PORT: "8000"
   # Database (using SQLite for simplicity, can switch to PostgreSQL)
   DATABASE_URL: "sqlite+aiosqlite:///./data/cognitia.db"
-  # Redis cache (optional)
-  REDIS_URL: "redis://cognitia-redis:6379/0"
   # JWT settings
   JWT_ALGORITHM: "HS256"
-  JWT_EXPIRE_MINUTES: "30"
+  JWT_ACCESS_EXPIRE_MINUTES: "60"
+  JWT_REFRESH_EXPIRE_DAYS: "30"
   # CORS
   CORS_ORIGINS: "*"
+  # Web UI path
+  STATIC_FILES_PATH: "/app/web"
