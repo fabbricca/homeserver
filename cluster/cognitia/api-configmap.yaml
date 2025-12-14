@@ -16,8 +16,8 @@ data:
   # Server settings
   HOST: "0.0.0.0"
   PORT: "8000"
-  # Database (using SQLite for simplicity, can switch to PostgreSQL)
-  DATABASE_URL: "sqlite+aiosqlite:///./data/cognitia.db"
+  # Database (PostgreSQL)
+  DATABASE_URL: "postgresql+asyncpg://cognitia:cognitia-db-secret-2024@cognitia-postgres:5432/cognitia"
   # JWT settings
   JWT_ALGORITHM: "HS256"
   JWT_ACCESS_EXPIRE_MINUTES: "60"
