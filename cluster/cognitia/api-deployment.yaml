@@ -14,6 +14,8 @@ spec:
       app.kubernetes.io/name: cognitia-api
   template:
     metadata:
+      annotations:
+        cognitia.io/rebuild: "2025-01-14-v1"
       labels:
         app.kubernetes.io/name: cognitia-api
         app.kubernetes.io/component: api
@@ -26,7 +28,7 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       containers:
-        - name: api
+        - name: cognitia-api
           image: fabbricca/cognitia-api:latest
           imagePullPolicy: Always
           securityContext:
