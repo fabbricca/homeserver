@@ -7,12 +7,20 @@ resources:
   - postgres-secret.yaml
   - postgres-deployment.yaml
   - postgres-service.yaml
+  # Redis cache (v2)
+  - redis-pvc.yaml
+  - redis-deployment.yaml
+  - redis-service.yaml
   # API server
   - api-pvc.yaml
   - api-configmap.yaml
   - api-secret.yaml
   - api-deployment.yaml
   - api-service.yaml
+  # Background jobs (v2)
+  - celery-worker-deployment.yaml
+  - celery-beat-deployment.yaml
+  # Ingress
   - ingress.yaml
 commonLabels:
   app.kubernetes.io/managed-by: flux

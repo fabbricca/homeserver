@@ -26,3 +26,14 @@ data:
   CORS_ORIGINS: "*"
   # Web UI path
   STATIC_FILES_PATH: "/app/web"
+  # Redis (for Celery)
+  REDIS_URL: "redis://cognitia-redis:6379/0"
+  # Email settings (v2)
+  EMAIL_MODE: "console"  # Options: console, smtp, sendgrid
+  SMTP_HOST: ""
+  SMTP_PORT: "587"
+  SMTP_USER: ""
+  SMTP_FROM_EMAIL: "noreply@cognitia.ai"
+  SMTP_FROM_NAME: "Cognitia"
+  # Frontend URL for email links
+  FRONTEND_URL: "https://cognitia.iberu.dev"
