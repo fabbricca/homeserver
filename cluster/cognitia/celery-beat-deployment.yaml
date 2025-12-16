@@ -45,6 +45,7 @@ spec:
             - cognitia.entrance.celery_app
             - beat
             - --loglevel=info
+            - --schedule=/app/schedule/celerybeat-schedule
           envFrom:
             - configMapRef:
                 name: cognitia-api-config
@@ -52,7 +53,7 @@ spec:
                 name: cognitia-api-secrets
           volumeMounts:
             - name: celery-schedule
-              mountPath: /app/celerybeat-schedule
+              mountPath: /app/schedule
           resources:
             requests:
               cpu: 50m
