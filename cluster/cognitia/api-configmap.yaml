@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/part-of: cognitia
 data:
   # Core connection (GPU server)
-  COGNITIA_CORE_URL: "http://10.0.0.15:8080"
+  COGNITIA_CORE_URL: "http://10.0.0.15:8001"
   # Ollama for text-only fallback mode
   OLLAMA_URL: "http://10.0.0.15:11434"
   OLLAMA_MODEL: "hf.co/TheBloke/Mythalion-13B-GGUF:Q4_K_M"

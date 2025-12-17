@@ -49,6 +49,8 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /app/data
+            - name: avatars
+              mountPath: /app/web/avatars
           resources:
             requests:
               cpu: 50m
@@ -72,4 +74,7 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: cognitia-data
+        - name: avatars
+          persistentVolumeClaim:
+            claimName: cognitia-avatars
       restartPolicy: Always

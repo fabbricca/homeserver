@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cognitia-avatars
+  namespace: cognitia
+  labels:
+    app.kubernetes.io/name: cognitia
+    app.kubernetes.io/component: avatars
+    app.kubernetes.io/part-of: cognitia
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nfs-csi
+  resources:
+    requests:
+      storage: 1Gi

@@ -13,6 +13,7 @@ resources:
   - redis-service.yaml
   # API server
   - api-pvc.yaml
+  - avatars-pvc.yaml
   - api-configmap.yaml
   - api-secret.yaml
   - api-deployment.yaml
