@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: memory-config
+  namespace: cognitia
+  labels:
+    app.kubernetes.io/name: memory-addon
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: cognitia-memory
+data:
+  # Neo4j for Graphiti
+  NEO4J_URI: "bolt://neo4j:7687"
+  NEO4J_USER: "neo4j"
+  # Qdrant
+  QDRANT_URL: "http://qdrant:6333"
+  QDRANT_COLLECTION: "cognitia_episodes"
+  # Embedding model (FastEmbed compatible)
+  EMBEDDING_MODEL: "BAAI/bge-small-en-v1.5"
+  # Ollama for LLM (GPU server)
+  OLLAMA_URL: "http://10.0.0.15:11434"
+  OLLAMA_MODEL: "llama3.2:latest"
+  # Salience scoring weights
+  SALIENCE_LLM_WEIGHT: "0.6"
+  SALIENCE_EMOTION_WEIGHT: "0.3"
+  SALIENCE_MANUAL_WEIGHT: "0.1"
+  # Recency decay constant (days)
+  RECENCY_DECAY_T: "30"
+  # Persona storage
+  PERSONA_STORAGE_DIR: "/app/personas"
+  # Redis for Celery
+  REDIS_HOST: "memory-redis"
+  REDIS_PORT: "6379"

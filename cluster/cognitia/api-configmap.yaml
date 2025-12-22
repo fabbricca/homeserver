@@ -39,3 +39,5 @@ data:
   SMTP_FROM_NAME: "Cognitia"
   # Frontend URL for email links
   FRONTEND_URL: "https://cognitia.iberu.dev"
+  # Memory Add-on Service
+  MEMORY_SERVICE_URL: "http://memory-addon:8000"

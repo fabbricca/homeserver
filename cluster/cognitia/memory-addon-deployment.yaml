@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-addon
+  namespace: cognitia
+  labels:
+    app.kubernetes.io/name: memory-addon
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: cognitia-memory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: memory-addon
+  template:
+    metadata:
+      annotations:
+        cognitia.io/rebuild: "2025-01-22-v1"
+      labels:
+        app.kubernetes.io/name: memory-addon
+        app.kubernetes.io/component: api
+        app.kubernetes.io/part-of: cognitia-memory
+    spec:
+      containers:
+        - name: memory-addon
+          image: fabbricca/cognitia-memory-addon:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: memory-config
+            - secretRef:
+                name: memory-secrets
+          volumeMounts:
+            - name: personas
+              mountPath: /app/personas
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 2Gi
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+      volumes:
+        - name: personas
+          persistentVolumeClaim:
+            claimName: memory-personas
+      restartPolicy: Always

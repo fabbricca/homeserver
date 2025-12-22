@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-celery-beat
+  namespace: cognitia
+  labels:
+    app.kubernetes.io/name: memory-celery-beat
+    app.kubernetes.io/component: scheduler
+    app.kubernetes.io/part-of: cognitia-memory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: memory-celery-beat
+  template:
+    metadata:
+      annotations:
+        cognitia.io/rebuild: "2025-01-22-v1"
+      labels:
+        app.kubernetes.io/name: memory-celery-beat
+        app.kubernetes.io/component: scheduler
+        app.kubernetes.io/part-of: cognitia-memory
+    spec:
+      containers:
+        - name: celery-beat
+          image: fabbricca/cognitia-memory-addon:latest
+          imagePullPolicy: Always
+          command: ["celery", "-A", "celery_app", "beat", "--loglevel=info"]
+          envFrom:
+            - configMapRef:
+                name: memory-config
+            - secretRef:
+                name: memory-secrets
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+      restartPolicy: Always

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-celery-worker
+  namespace: cognitia
+  labels:
+    app.kubernetes.io/name: memory-celery-worker
+    app.kubernetes.io/component: worker
+    app.kubernetes.io/part-of: cognitia-memory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: memory-celery-worker
+  template:
+    metadata:
+      annotations:
+        cognitia.io/rebuild: "2025-01-22-v1"
+      labels:
+        app.kubernetes.io/name: memory-celery-worker
+        app.kubernetes.io/component: worker
+        app.kubernetes.io/part-of: cognitia-memory
+    spec:
+      containers:
+        - name: celery-worker
+          image: fabbricca/cognitia-memory-addon:latest
+          imagePullPolicy: Always
+          command: ["celery", "-A", "celery_app", "worker", "--loglevel=info", "--concurrency=2"]
+          envFrom:
+            - configMapRef:
+                name: memory-config
+            - secretRef:
+                name: memory-secrets
+          volumeMounts:
+            - name: personas
+              mountPath: /app/personas
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 2Gi
+      volumes:
+        - name: personas
+          persistentVolumeClaim:
+            claimName: memory-personas
+      restartPolicy: Always

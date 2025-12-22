@@ -21,6 +21,23 @@ resources:
   # Background jobs (v2)
   - celery-worker-deployment.yaml
   - celery-beat-deployment.yaml
+  # Memory Add-on Services
+  - neo4j-pvc.yaml
+  - neo4j-deployment.yaml
+  - neo4j-service.yaml
+  - qdrant-pvc.yaml
+  - qdrant-deployment.yaml
+  - qdrant-service.yaml
+  - memory-redis-pvc.yaml
+  - memory-redis-deployment.yaml
+  - memory-redis-service.yaml
+  - memory-addon-pvc.yaml
+  - memory-configmap.yaml
+  - memory-secret.yaml
+  - memory-addon-deployment.yaml
+  - memory-addon-service.yaml
+  - memory-celery-worker-deployment.yaml
+  - memory-celery-beat-deployment.yaml
   # Ingress
   - ingress.yaml
 commonLabels:
