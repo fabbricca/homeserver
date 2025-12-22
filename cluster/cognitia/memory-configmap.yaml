@@ -18,7 +18,7 @@ data:
   EMBEDDING_MODEL: "BAAI/bge-small-en-v1.5"
   # Ollama for LLM (GPU server)
   OLLAMA_URL: "http://10.0.0.15:11434"
-  OLLAMA_MODEL: "llama3.2:latest"
+  OLLAMA_MODEL: "llama3.2:3b"
   # Salience scoring weights
   SALIENCE_LLM_WEIGHT: "0.6"
   SALIENCE_EMOTION_WEIGHT: "0.3"
