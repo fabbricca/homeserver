@@ -23,6 +23,13 @@ spec:
     - host: cognitia.iberu.me
       http:
         paths:
+          - path: /api/auth/me
+            pathType: Prefix
+            backend:
+              service:
+                name: cognitia-api
+                port:
+                  number: 8000
           - path: /api/auth
             pathType: Prefix
             backend:
