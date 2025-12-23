@@ -22,6 +22,10 @@ spec:
       namespace: cognitia
     - apiVersion: apps/v1
       kind: Deployment
+      name: cognitia-auth
+      namespace: cognitia
+    - apiVersion: apps/v1
+      kind: Deployment
       name: memory-addon
       namespace: cognitia
     - apiVersion: apps/v1
