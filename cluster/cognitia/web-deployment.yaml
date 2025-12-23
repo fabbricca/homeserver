@@ -30,9 +30,6 @@ spec:
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
             readOnlyRootFilesystem: false
           ports:
             - name: http
