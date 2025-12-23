@@ -24,6 +24,10 @@ data:
   JWT_ALGORITHM: "HS256"
   JWT_ACCESS_EXPIRE_MINUTES: "60"
   JWT_REFRESH_EXPIRE_DAYS: "30"
+  # JWT (JWKS / RS256)
+  JWKS_URL: "http://cognitia-auth:8000/.well-known/jwks.json"
+  JWT_ISSUER: "https://auth.cognitia.iberu.me"
+  JWT_AUDIENCE: "cognitia-api"
   # CORS
   CORS_ORIGINS: "*"
   # Web UI path

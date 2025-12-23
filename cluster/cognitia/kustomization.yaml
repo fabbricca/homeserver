@@ -18,6 +18,13 @@ resources:
   - api-secret.yaml
   - api-deployment.yaml
   - api-service.yaml
+  # Auth service (JWT issuer + JWKS)
+  - auth-configmap.yaml
+  - auth-secret.yaml
+  - auth-deployment.yaml
+  - auth-service.yaml
+  - auth-certificate.yaml
+  - auth-ingress.yaml
   # Background jobs (v2)
   - celery-worker-deployment.yaml
   - celery-beat-deployment.yaml
