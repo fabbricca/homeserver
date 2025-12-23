@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-12-23-api-webui-v1"
+        cognitia.io/rebuild: "2025-12-23-api-user-provision-v1"
       labels:
         app.kubernetes.io/name: cognitia-api
         app.kubernetes.io/component: api
