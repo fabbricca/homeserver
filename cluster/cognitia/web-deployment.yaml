@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-12-23-web-v1"
+        cognitia.io/rebuild: "2025-12-23-web-v2"
       labels:
         app.kubernetes.io/name: cognitia-web
         app.kubernetes.io/component: web
