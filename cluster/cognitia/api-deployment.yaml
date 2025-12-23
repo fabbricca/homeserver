@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-12-23-auth-jwks-v2"
+        cognitia.io/rebuild: "2025-12-23-auth-jwks-v3"
       labels:
         app.kubernetes.io/name: cognitia-api
         app.kubernetes.io/component: api
