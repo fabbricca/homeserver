@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-12-23-auth-v4"
+        cognitia.io/rebuild: "2025-12-23-auth-v5"
       labels:
         app.kubernetes.io/name: cognitia-auth
         app.kubernetes.io/component: auth
