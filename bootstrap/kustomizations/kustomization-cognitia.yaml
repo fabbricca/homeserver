@@ -7,7 +7,7 @@ spec:
   interval: 3m
   path: cluster/cognitia
   prune: true
-  timeout: 2m
+  timeout: 10m
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -19,4 +19,24 @@ spec:
     - apiVersion: apps/v1
       kind: Deployment
       name: cognitia-api
+      namespace: cognitia
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: memory-addon
+      namespace: cognitia
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: cognitia-celery-worker
+      namespace: cognitia
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: cognitia-celery-beat
+      namespace: cognitia
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: memory-celery-worker
+      namespace: cognitia
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: memory-celery-beat
       namespace: cognitia
