@@ -19,5 +19,5 @@ data:
   ACCESS_TOKEN_TTL_MINUTES: "30"
   REFRESH_TOKEN_TTL_DAYS: "30"
 
-  JWT_PRIVATE_KEY_PATH: "/run/secrets/jwt_private.pem"
-  JWT_PUBLIC_KEY_PATH: "/run/secrets/jwt_public.pem"
+  JWT_PRIVATE_KEY_PATH: "/etc/cognitia/jwt/jwt_private.pem"
+  JWT_PUBLIC_KEY_PATH: "/etc/cognitia/jwt/jwt_public.pem"

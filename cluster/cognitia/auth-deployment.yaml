@@ -40,7 +40,7 @@ spec:
                 name: cognitia-auth-config
           volumeMounts:
             - name: jwt-keys
-              mountPath: /run/secrets
+              mountPath: /etc/cognitia/jwt
               readOnly: true
           resources:
             requests:
