@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-12-23-auth-v2"
+        cognitia.io/rebuild: "2025-12-23-auth-v3"
       labels:
         app.kubernetes.io/name: cognitia-auth
         app.kubernetes.io/component: auth
@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: cognitia-auth
-          image: fabbricca/cognitia-auth:latest
+          image: fabbricca/cognitia-api:auth-latest
           imagePullPolicy: Always
           ports:
             - name: http
