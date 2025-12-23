@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-12-23-auth-v3"
+        cognitia.io/rebuild: "2025-12-23-auth-v4"
       labels:
         app.kubernetes.io/name: cognitia-auth
         app.kubernetes.io/component: auth
@@ -25,6 +25,12 @@ spec:
         - name: cognitia-auth
           image: fabbricca/cognitia-api:auth-latest
           imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: false
           ports:
             - name: http
               containerPort: 8000
