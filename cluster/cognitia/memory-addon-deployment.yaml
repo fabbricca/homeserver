@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-01-22-v2-timezone-fix"
+        cognitia.io/rebuild: "2025-12-23-memory-v2"
       labels:
         app.kubernetes.io/name: memory-addon
         app.kubernetes.io/component: api

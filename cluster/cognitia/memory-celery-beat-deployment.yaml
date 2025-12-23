@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-01-22-v1"
+        cognitia.io/rebuild: "2025-12-23-memory-v2"
       labels:
         app.kubernetes.io/name: memory-celery-beat
         app.kubernetes.io/component: scheduler

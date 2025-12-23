@@ -25,6 +25,9 @@ data:
   SALIENCE_MANUAL_WEIGHT: "0.1"
   # Recency decay constant (days)
   RECENCY_DECAY_T: "30"
+  # Persistence gating (avoid saving every turn)
+  MIN_EPISODE_SALIENCE_TO_STORE: "0.6"
+  MIN_FACTS_FOR_STORAGE: "1"
   # Persona storage
   PERSONA_STORAGE_DIR: "/app/personas"
   # Redis for Celery
