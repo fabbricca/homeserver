@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cognitia-web
+  namespace: cognitia
+  labels:
+    app.kubernetes.io/name: cognitia-web
+    app.kubernetes.io/component: web
+    app.kubernetes.io/part-of: cognitia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cognitia-web
+  template:
+    metadata:
+      annotations:
+        cognitia.io/rebuild: "2025-12-23-web-v1"
+      labels:
+        app.kubernetes.io/name: cognitia-web
+        app.kubernetes.io/component: web
+        app.kubernetes.io/part-of: cognitia
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
+        fsGroup: 101
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: cognitia-web
+          image: fabbricca/cognitia-web:latest
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 2
+            periodSeconds: 10
+      restartPolicy: Always

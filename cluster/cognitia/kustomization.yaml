@@ -18,6 +18,9 @@ resources:
   - api-secret.yaml
   - api-deployment.yaml
   - api-service.yaml
+  # Web frontend (static)
+  - web-deployment.yaml
+  - web-service.yaml
   # Auth service (JWT issuer + JWKS)
   - auth-configmap.yaml
   - auth-secret.yaml
