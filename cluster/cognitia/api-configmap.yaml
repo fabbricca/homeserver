@@ -32,8 +32,6 @@ data:
   CORS_ORIGINS: "*"
   # Web UI path
   STATIC_FILES_PATH: "/app/web"
-  # Redis (for Celery)
-  REDIS_URL: "redis://cognitia-redis:6379/0"
   # Email settings (v2)
   EMAIL_MODE: "console"  # Options: console, smtp, sendgrid
   SMTP_HOST: ""

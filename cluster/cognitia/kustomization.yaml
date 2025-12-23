@@ -7,10 +7,6 @@ resources:
   - postgres-secret.yaml
   - postgres-deployment.yaml
   - postgres-service.yaml
-  # Redis cache (v2)
-  - redis-pvc.yaml
-  - redis-deployment.yaml
-  - redis-service.yaml
   # API server
   - api-pvc.yaml
   - avatars-pvc.yaml
@@ -28,9 +24,6 @@ resources:
   - auth-service.yaml
   - auth-certificate.yaml
   - auth-ingress.yaml
-  # Background jobs (v2)
-  - celery-worker-deployment.yaml
-  - celery-beat-deployment.yaml
   # Memory Add-on Services
   - neo4j-pvc.yaml
   - neo4j-deployment.yaml
@@ -38,16 +31,11 @@ resources:
   - qdrant-pvc.yaml
   - qdrant-deployment.yaml
   - qdrant-service.yaml
-  - memory-redis-pvc.yaml
-  - memory-redis-deployment.yaml
-  - memory-redis-service.yaml
   - memory-addon-pvc.yaml
   - memory-configmap.yaml
   - memory-secret.yaml
   - memory-addon-deployment.yaml
   - memory-addon-service.yaml
-  - memory-celery-worker-deployment.yaml
-  - memory-celery-beat-deployment.yaml
   # Ingress
   - ingress.yaml
 commonLabels:

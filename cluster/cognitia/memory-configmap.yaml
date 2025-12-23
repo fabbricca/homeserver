@@ -30,6 +30,3 @@ data:
   MIN_FACTS_FOR_STORAGE: "1"
   # Persona storage
   PERSONA_STORAGE_DIR: "/app/personas"
-  # Redis for Celery
-  REDIS_HOST: "memory-redis"
-  REDIS_PORT: "6379"
