@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-12-24-web-avatar-auth"
+        cognitia.io/rebuild: "2025-12-24-web-auth-detect"
       labels:
         app.kubernetes.io/name: cognitia-web
         app.kubernetes.io/component: web
@@ -26,7 +26,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: cognitia-web
-          image: fabbricca/cognitia-web:avatar-auth-20251224-2214
+          image: fabbricca/cognitia-web:auth-detect-20251224-2330
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
