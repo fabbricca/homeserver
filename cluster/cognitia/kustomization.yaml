@@ -13,6 +13,7 @@ resources:
   - api-livekit-secret.yaml
   - api-deployment.yaml
   - api-service.yaml
+  - api-lb-service.yaml
   # Redis (cache + streams)
   - redis-deployment.yaml
   - redis-service.yaml
@@ -29,6 +30,7 @@ resources:
   - auth-secret.yaml
   - auth-deployment.yaml
   - auth-service.yaml
+  - auth-lb-service.yaml
   # Ingress
   - ingress.yaml
 commonLabels:
