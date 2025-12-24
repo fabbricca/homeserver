@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-12-24-api-avatar-auth"
+        cognitia.io/rebuild: "2025-12-25-api-msg-delete"
       labels:
         app.kubernetes.io/name: cognitia-api
         app.kubernetes.io/component: api
@@ -29,7 +29,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: cognitia-api
-          image: fabbricca/cognitia-api:avatar-auth-20251224-2214
+          image: fabbricca/cognitia-api:msg-delete-20251225-0043
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
