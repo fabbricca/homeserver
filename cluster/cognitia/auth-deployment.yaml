@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: cognitia-auth
-          image: fabbricca/cognitia-api:auth-latest
+          image: fabbricca/cognitia-auth:7d8380f
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false

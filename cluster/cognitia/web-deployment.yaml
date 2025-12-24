@@ -26,7 +26,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: cognitia-web
-          image: fabbricca/cognitia-api:web-latest
+          image: fabbricca/cognitia-web:7d8380f
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false

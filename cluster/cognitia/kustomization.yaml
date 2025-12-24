@@ -10,8 +10,17 @@ resources:
   # API server
   - avatars-pvc.yaml
   - api-configmap.yaml
+  - api-livekit-secret.yaml
   - api-deployment.yaml
   - api-service.yaml
+  # Redis (cache + streams)
+  - redis-deployment.yaml
+  - redis-service.yaml
+  # LiveKit (WebRTC)
+  - livekit-secret.yaml
+  - livekit-deployment.yaml
+  - livekit-service.yaml
+  - livekit-ingress.yaml
   # Web frontend (static)
   - web-deployment.yaml
   - web-service.yaml
@@ -20,18 +29,6 @@ resources:
   - auth-secret.yaml
   - auth-deployment.yaml
   - auth-service.yaml
-  # Memory Add-on Services
-  - neo4j-pvc.yaml
-  - neo4j-deployment.yaml
-  - neo4j-service.yaml
-  - qdrant-pvc.yaml
-  - qdrant-deployment.yaml
-  - qdrant-service.yaml
-  - memory-addon-pvc.yaml
-  - memory-configmap.yaml
-  - memory-secret.yaml
-  - memory-addon-deployment.yaml
-  - memory-addon-service.yaml
   # Ingress
   - ingress.yaml
 commonLabels:

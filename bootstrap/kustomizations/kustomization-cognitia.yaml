@@ -26,21 +26,17 @@ spec:
       namespace: cognitia
     - apiVersion: apps/v1
       kind: Deployment
-      name: memory-addon
+      name: cognitia-web
       namespace: cognitia
     - apiVersion: apps/v1
       kind: Deployment
-      name: cognitia-celery-worker
+      name: cognitia-postgres
       namespace: cognitia
     - apiVersion: apps/v1
       kind: Deployment
-      name: cognitia-celery-beat
+      name: cognitia-redis
       namespace: cognitia
     - apiVersion: apps/v1
       kind: Deployment
-      name: memory-celery-worker
-      namespace: cognitia
-    - apiVersion: apps/v1
-      kind: Deployment
-      name: memory-celery-beat
+      name: cognitia-livekit
       namespace: cognitia

@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cognitia-livekit-ingress
+  namespace: cognitia
+  labels:
+    app.kubernetes.io/name: cognitia-livekit
+    app.kubernetes.io/component: livekit
+    app.kubernetes.io/part-of: cognitia
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-buffering: "off"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - cognitia.iberu.me
+      secretName: cognitia-tls
+  rules:
+    - host: cognitia.iberu.me
+      http:
+        paths:
+          - path: /livekit(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: cognitia-livekit
+                port:
+                  number: 7880

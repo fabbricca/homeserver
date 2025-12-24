@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/component: api
     app.kubernetes.io/part-of: cognitia
 data:
-  # Orchestrator (optional, for /ws proxy)
+  # Orchestrator (optional, for SSE chat streaming)
   COGNITIA_CORE_URL: "http://10.0.0.15:8080"
 
   # Ollama fallback (optional)
@@ -26,5 +26,11 @@ data:
   JWT_ISSUER: "https://auth.cognitia.iberu.me"
   JWT_AUDIENCE: "cognitia-api"
 
-  # Memory Add-on Service
-  MEMORY_SERVICE_URL: "http://memory-addon:8000"
+  # Redis (cache + streams)
+  REDIS_URL: "redis://cognitia-redis:6379/0"
+  CACHE_TTL_SESSION: "600"
+  CACHE_TTL_CHAT: "600"
+  CACHE_TTL_CHARACTER: "600"
+
+  # Memory service (GPU host)
+  MEMORY_SERVICE_URL: "http://10.0.0.15:8002"

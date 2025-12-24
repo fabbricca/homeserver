@@ -29,7 +29,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: cognitia-api
-          image: fabbricca/cognitia-api:latest
+          image: fabbricca/cognitia-api:7d8380f
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
@@ -44,6 +44,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognitia-api-config
+            - secretRef:
+                name: cognitia-api-livekit
           volumeMounts:
             - name: avatars
               mountPath: /app/web/avatars
