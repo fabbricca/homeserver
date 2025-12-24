@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-12-24-web-graph-panzoom"
+        cognitia.io/rebuild: "2025-12-24-web-avatar-auth"
       labels:
         app.kubernetes.io/name: cognitia-web
         app.kubernetes.io/component: web
@@ -26,7 +26,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: cognitia-web
-          image: fabbricca/cognitia-web:graph-panzoom-20251224-1913
+          image: fabbricca/cognitia-web:avatar-auth-20251224-2214
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false

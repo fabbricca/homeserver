@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-12-24-chat-persist-avatars"
+        cognitia.io/rebuild: "2025-12-24-api-avatar-auth"
       labels:
         app.kubernetes.io/name: cognitia-api
         app.kubernetes.io/component: api
@@ -29,7 +29,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: cognitia-api
-          image: fabbricca/cognitia-api:chat-persist-avatars-20251224-2145
+          image: fabbricca/cognitia-api:avatar-auth-20251224-2214
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
