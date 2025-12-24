@@ -8,38 +8,23 @@ metadata:
     app.kubernetes.io/component: api
     app.kubernetes.io/part-of: cognitia
 data:
-  # Core connection (GPU server)
+  # Orchestrator (optional, for /ws proxy)
   COGNITIA_CORE_URL: "http://10.0.0.15:8080"
-  # Ollama for text-only fallback mode
+
+  # Ollama fallback (optional)
   OLLAMA_URL: "http://10.0.0.15:11434"
   OLLAMA_MODEL: "llama3.2:3b"
-  # Memory extraction model (for entity/fact extraction)
-  MEMORY_EXTRACTION_MODEL: "llama3.2:3b"
-  # Server settings
-  HOST: "0.0.0.0"
-  PORT: "8000"
+
+  # Avatar storage path (API writes files here)
+  AVATAR_UPLOAD_DIR: "/app/web/avatars"
+
   # Database (PostgreSQL)
   DATABASE_URL: "postgresql+asyncpg://cognitia:cognitia-db-secret-2024@cognitia-postgres:5432/cognitia"
-  # JWT settings
-  JWT_ALGORITHM: "HS256"
-  JWT_ACCESS_EXPIRE_MINUTES: "60"
-  JWT_REFRESH_EXPIRE_DAYS: "30"
+
   # JWT (JWKS / RS256)
   JWKS_URL: "http://cognitia-auth:8000/.well-known/jwks.json"
   JWT_ISSUER: "https://auth.cognitia.iberu.me"
   JWT_AUDIENCE: "cognitia-api"
-  # CORS
-  CORS_ORIGINS: "*"
-  # Web UI path
-  STATIC_FILES_PATH: "/app/web"
-  # Email settings (v2)
-  EMAIL_MODE: "console"  # Options: console, smtp, sendgrid
-  SMTP_HOST: ""
-  SMTP_PORT: "587"
-  SMTP_USER: ""
-  SMTP_FROM_EMAIL: "noreply@cognitia.ai"
-  SMTP_FROM_NAME: "Cognitia"
-  # Frontend URL for email links
-  FRONTEND_URL: "https://cognitia.iberu.dev"
+
   # Memory Add-on Service
   MEMORY_SERVICE_URL: "http://memory-addon:8000"

@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        cognitia.io/rebuild: "2025-12-23-entrance-avatar-v1"
+        cognitia.io/rebuild: "2025-12-24-api-minimal-v1"
       labels:
         app.kubernetes.io/name: cognitia-api
         app.kubernetes.io/component: api
@@ -44,11 +44,7 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognitia-api-config
-            - secretRef:
-                name: cognitia-api-secrets
           volumeMounts:
-            - name: data
-              mountPath: /app/data
             - name: avatars
               mountPath: /app/web/avatars
           resources:
@@ -71,9 +67,6 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
       volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: cognitia-data
         - name: avatars
           persistentVolumeClaim:
             claimName: cognitia-avatars
