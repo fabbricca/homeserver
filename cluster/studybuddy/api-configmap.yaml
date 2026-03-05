@@ -1,44 +1,54 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: studybuddy-api-config
-  namespace: studybuddy
-  labels:
-    app.kubernetes.io/name: studybuddy-api
-    app.kubernetes.io/component: api
-    app.kubernetes.io/part-of: studybuddy
+    name: studybuddy-api-config
+    namespace: studybuddy
+    labels:
+        app.kubernetes.io/name: studybuddy-api
+        app.kubernetes.io/component: api
+        app.kubernetes.io/part-of: studybuddy
 data:
-  NODE_ENV: "production"
-  PORT: "3000"
-  LOG_LEVEL: "info"
-
-  # Database (PostgreSQL + pgvector) – shared instance, studybuddy-scoped user + DB
-  # DB and user are provisioned by cluster/postgres/initdb-configmap.yaml (01-studybuddy.sql)
-  DATABASE_URL: "postgresql://studybuddy_app:CHANGE_ME_studybuddy_db_password@postgres.postgres.svc.cluster.local:5432/studybuddy"
-
-  # NATS JetStream – studybuddy-internal event bus (same namespace)
-  NATS_URL: "nats://studybuddy-nats:4222"
-
-  # MinIO object storage – shared instance, studybuddy-scoped bucket + IAM user
-  # Bucket and IAM user are provisioned by cluster/minio/studybuddy-provision-job.yaml
-  MINIO_ENDPOINT: "minio.minio.svc.cluster.local"
-  MINIO_PORT: "9000"
-  MINIO_USE_SSL: "false"
-  MINIO_BUCKET: "studybuddy"
-  # Public presigned URL base. MINIO_USE_SSL=false so the SDK generates http:// URLs.
-  # Pangolin (the internet-facing edge proxy on the Oracle VM) upgrades connections to
-  # HTTPS, and MinIO signature validation is host-based (not scheme-based), so this works.
-  # Register minio.iberu.me in Pangolin's admin UI pointing to the Newt tunnel.
-  MINIO_PUBLIC_HOST: "minio.iberu.me"
-  MINIO_PUBLIC_PORT: "80"
-
-  # Keycloak auth – shared instance, studybuddy realm
-  # Realm is imported at startup from the image (keycloak/studybuddy-realm.json).
-  # Internal JWKS call uses cluster-local DNS; issuer validation uses the public URL.
-  KEYCLOAK_JWKS_URI: "http://keycloak.keycloak.svc.cluster.local:8080/realms/studybuddy/protocol/openid-connect/certs"
-  KEYCLOAK_ISSUER: "https://keycloak.iberu.me/realms/studybuddy"
-
-  # Ollama – GPU server shared with other platforms (same host as cognitia)
-  # Model: phi4-reasoning-plus (verify exact Ollama tag: `ollama list` on 10.0.0.15)
-  OLLAMA_BASE_URL: "http://10.0.0.15:11434"
-  OLLAMA_MODEL: "phi4-reasoning-plus"
+    NODE_ENV: ENC[AES256_GCM,data:tYHTSOeDqthHMA==,iv:X9ImBCfU5m7+tRozamdygVxnWx5ySrDHNhCSX8WIUdI=,tag:Mn0jN86DfvYjZFOMEyTh8Q==,type:str]
+    PORT: ENC[AES256_GCM,data:vpnIXg==,iv:z7xchokbLTWG+VwgkYXkYygRmv+ZZ4Qzd2Gt6OfHaFU=,tag:DIVqqJtFIgQH2i9Bf3ynmg==,type:str]
+    LOG_LEVEL: ENC[AES256_GCM,data:CiFmAw==,iv:PdIYzUeZn3K/mq/bd+f5j7qIqWdTQ5WkENUUvTm4zqA=,tag:mrIlEJglo/wKDYQvjYX8Eg==,type:str]
+    #ENC[AES256_GCM,data:G0H908j5L3QoooMiuQHIFJ87YL74gHtdbe/alVSbaVXH/OtMHWlPBdvhCzVfocQMTFV54nIHk6RA1XHU1wTJ+g1FrdcAtL3X2An25O/NPGVHuA==,iv:xCy8TWtzjyaWkX6ixXnUMV3r4lPXsRq+MI314edW2mQ=,tag:W3wF04tQghIOkv5vnJZnlA==,type:comment]
+    #ENC[AES256_GCM,data:7qsQ3Q3uM9VUbF/ANKT788L/gchCrfwXwQbruyeA/eAUlZLhKwLFyRXUCp69KIea2DNDVOmbqRzap7P4KfybanpBYVC+uVmENRq2tROvsWf4qGjQC/Vy58ql,iv:BbM7BL7CmCaDk0wMnFK8c12t0HlZ/QThufLoqXTS99M=,tag:vzVvHoihC3PsGpO0TmAwlg==,type:comment]
+    DATABASE_URL: ENC[AES256_GCM,data:SUXiZt7WVlQOycHhKKA2LaZ/8by/363tgsi6i8FtQF5Pa9QyeYw8egckHp1i8xSucJK66bjx+aLU14rp+7hLqOkClWAot8QwDhA12jpgDma98QxxBXPeY2+FjFo=,iv:BO+eI00NRJBBHXzMZc8ffw3MfqCWJMGFe3R1GTaYXok=,tag:nGk6ZRVokwbNRLhDfn1ryQ==,type:str]
+    #ENC[AES256_GCM,data:fNNXyNm0o3gtgOblGvrdF1v8ZnUbYKOKMZk+7d+KjGDCXio04JfKr+CUK6yTzkf62KKmybJqNXvJo09tZa/vLJXz,iv:GqU5f/6YXQxE+oyNYMccjCx5OHdmy41BXT1qCM2o80w=,tag:E4wwl6+7XHKDvAQGVyoXTA==,type:comment]
+    NATS_URL: ENC[AES256_GCM,data:Fv0ufnehfBoN85oeRDmPnA14CqdgE+IPhPCZ,iv:PMmMu4Mn5rOMD/polIrjHs8fCleShsiptp2uU8CQCfA=,tag:Eylfmhex+nuJLrHlfKdK6g==,type:str]
+    #ENC[AES256_GCM,data:MSTRWTN77y21I6MTYxRJwsf4mHt7VbCHp6YXp9+PiyBADis2sBvQcEurGDubUikRKh5hhEBuw9c6EhPvTxQlWSxm6JphLO/HCDyy9aEM,iv:KE1NfYtQ87c35e9tddc1McKBYI8PlFMUp6seJ+xxKP4=,tag:IAb3A91TFVyfb1aPvcKzPg==,type:comment]
+    #ENC[AES256_GCM,data:/jdgk2crKJUlLiGdhzgfTxa2TJhjtpQYy/QfUiM9Rq/w56BiJhu7zHwVJF8gCA4t2v/osH1IVHUMo4+D64qbcdLSRc++JyLekOY8b1V6CYN06AE=,iv:ghTZVIU0713XD9P/2o8Y8V8+ZlagLomc6y1ofJyeiyQ=,tag:lFXarBMG/YZpweIvmtccHQ==,type:comment]
+    MINIO_ENDPOINT: ENC[AES256_GCM,data:HLujXJXiYBjhRbXB+13ns1eTxY7xat3BQs2Te4Y=,iv:eY3KKYWNrXBJIuTFN1Swa976zSBMguYeZ8jZSNHOoyg=,tag:ICmo+vSO3AGvFYRFqRpswA==,type:str]
+    MINIO_PORT: ENC[AES256_GCM,data:LVxx6w==,iv:tqdwoFeCRapLqbmyW9QtgNjmWeZ/gPqfx1xRq1ZDZNM=,tag:RZmTIWmcqG+6nM6yOY/R6g==,type:str]
+    MINIO_USE_SSL: ENC[AES256_GCM,data:ifssG3E=,iv:L+0aF5NHxsjBOiLU6gEhVuTHy9/8GEGNMnGtPJPZqVk=,tag:2KVZL0W/95QHEHcZX8WspQ==,type:str]
+    MINIO_BUCKET: ENC[AES256_GCM,data:ue/3+7RFARqECQ==,iv:lwoHaz5LiMZ0AwWmHgE2BiXYpye6tdXePuA9LBiVXXE=,tag:JqKEJzTOgxvIHmr4yZ7iaQ==,type:str]
+    #ENC[AES256_GCM,data:IFPAg9ktgdunaiDfCBY4OYJY2WS3M4VBzoT3iWqBVRVfM9HX2/vVqJZyoTF0eWz2e6IWNyaWNevJHsIfTxcEl5OqCvVwDo42DmRW60JEnf76mw==,iv:fRIZIe1Uqph3nxzDBvqYZbmc+vtCIGs2BSSs28Isf50=,tag:QnvXPjQ7PejCpXBoX9m/zw==,type:comment]
+    #ENC[AES256_GCM,data:zPbIbPuh3aSjznuUjc16McUTuIQFT4lZNEY1aDoeMGcWx6UEFT/hXUqbIbZ5Z8IDYSIz1dlVe49D1Z49ljqFRQHQlYzpkfNilXBzl6jSl/dN6R0=,iv:G1QblyWYk4VsMhVi2R/et4F0K42bvtoOqmmG+RhWk+s=,tag:7+LFBWkLi/+IFf9BWP3r3g==,type:comment]
+    #ENC[AES256_GCM,data:Selt9AUfkAS8AiQPfm/35yfauTlkOJ6lZ6mRAWLWa/pbH+aEV4hkPRHG89mRrNBUwESWARGXGz7+McOmuTe+zBYbpFe3uKBljDQLKdByjx5g8rFDFxgt,iv:6Gb6VqH/eWEpY0VAKjRwtP0Zeyvl77Gem7wWjNYpMuw=,tag:k6WC3+BrwtQFgk+PtB1B1w==,type:comment]
+    #ENC[AES256_GCM,data:1pXyejWTnlgtPWVvGxw9z8SGunnPxMDPiz0xjyqWkCLuxF8DlJAsWkx0UQuordQF69XPimfNTd8FyNEF11foLO7GB3DGutAQmjRZrQ==,iv:UWdXT6ZTLYRL6C+3EX0Io7hTufba+qXkMxyC8sy1OGw=,tag:zFGpOSw+QCa1x4PAx51EFw==,type:comment]
+    MINIO_PUBLIC_HOST: ENC[AES256_GCM,data:IGh8xIn5yBmPD3blB2E=,iv:m+SCFem11DtV4SopOAAy9eEtY3c2MIA7To+SskvNcMg=,tag:rLbf0909Pdp6O26qPiDTRA==,type:str]
+    MINIO_PUBLIC_PORT: ENC[AES256_GCM,data:61o=,iv:dfG9FJnvX73xQBSBJ4myOZdW3k7CoPcU+uhQzfPeRTw=,tag:icaVuPmQbza0SiVGquJw+A==,type:str]
+    #ENC[AES256_GCM,data:tib6d9+3VXpNasHuGXOBRzRPGLF+uvNG7Qz9aReJFRtgFpxXHK4mdRV17IkexklJNmkS6w==,iv:NcqPaZfsjZRmhvQvFQ+Q8IEeORpM/+xfeNo8sNDKTCs=,tag:n2Lbi6A4++B6BN8bFOx2kQ==,type:comment]
+    #ENC[AES256_GCM,data:dVwcbv/FXvaEQ0lEhwJzHTISyY4CqtlsgnsbkAnbMhc2oQnW1YKns30JpVVbzagQ+7f1ISvAONC9YRZszzFvbubmBpFNY9CRyGc8Kxko,iv:sSyIYEnu76HNJ+/xpAiRC+e6eoUPX1qKk/xhL9Qh3OQ=,tag:11oIlZM4dtELCVerCWHI2A==,type:comment]
+    #ENC[AES256_GCM,data:UQiiM6mJN1qq6b25cyrtBLO85dJEAdcZHZRgXwe0AuHh67JmtQ+mA103W89z13jbbirG1nwbTJnDCsec5iKjp49jfswpBFYi5zgYN/tbtPp/HQ==,iv:VyW2Sbo6+U7RjiROt3OY5i6Ctxu6FjmsRhWfpKfO+uU=,tag:imeeIcX7RvE1ksgSXC4j5g==,type:comment]
+    KEYCLOAK_JWKS_URI: ENC[AES256_GCM,data:hzZMEN9cJ39q+iafggFaoVDdjHN5egKleBG6qoFFSVmad5xIs+GZ1UCoIAI3W+mzctobGfVPO8nLXIs3reldpBe2sFBV2F+EAIK51UbJV5f3zAB4ZCtzVqQ36h7GOe8=,iv:s1hw7mfeuluZG6PnE4iM4K0ROwefrEaohH9bl4TMYaM=,tag:wzc8n4Sl/pwgrr91NGSThw==,type:str]
+    KEYCLOAK_ISSUER: ENC[AES256_GCM,data:Lfsbl1KmBe//uLs/PeBEiPrqKOTxzmnijhIkGp3NQiO9uQ9tizzgFG5TBw==,iv:ezgHxKqgpZLLoRP9wlzgizlLr1aCcMB6PRPqunGbezE=,tag:lfA+7UUEK4cXI//KAv5M+Q==,type:str]
+    #ENC[AES256_GCM,data:8SNh1c8bO9i2IqKet2SGLEhakdLAOqbAeuiCTi9kB/E/wZ/WWTsRw3zvSffrlkIAIEM0i+0UWyjJFAtNrpVQDUkFaPm9gUVQC9I=,iv:gzEggvWIi93GWgq7hX7DjQvIQ1uvytWqzTChlgROmik=,tag:DbSHM8e94FlJWIcHRwHxgA==,type:comment]
+    #ENC[AES256_GCM,data:2vh1YZmt+GoPzanSarpqlHo26Mqt//epXVkHMPJfwyl1OPpB8FC256DWOQ+HPHGyjJYx/WrPR1U2/GhiHQ8r0VaJTxqP2OkqR1q2c4P88axw,iv:IuMjqti57BAxLZdYyzeUCXztTu/i4XWFHZUcvOneGiw=,tag:ankpGU0bEvr4UNARxaRWsA==,type:comment]
+    OLLAMA_BASE_URL: ENC[AES256_GCM,data:eGe0kBpYIa08mjhGwF1u7bm5lBo3+Q==,iv:4RtjVEdSif6pKz7TBMIm/ptWW8q0acezxMMJMfZl6TM=,tag:H6JgZUnluzozfpNL1xAEcg==,type:str]
+    OLLAMA_MODEL: ENC[AES256_GCM,data:w2YjqIMSWkGJ9dcUUtEpC4zO6A==,iv:FJwOBMKxbip6bBNuSnJscBgLYjF2Htl679gUxysMGKg=,tag:1D+F6LD8kzt0NjrF3T9Vtw==,type:str]
+sops:
+    age:
+        - recipient: age1n39wyrdgfj9ta5s7fwj786d4jjjhc90aw7f2ffqsmg794vme6swqtd9jca
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLYkdKVTUzVDVGSktIdUNh
+            VG1nbnIzS1phYXFvS2tiTzlhcWdpcEVqclZ3Cm1teGljQ2pyQ29xRGxpRFJYdmE4
+            N2NRdTVVMkFZeDNIWXU4RU0xUGtvOHcKLS0tIHl5aGpQQllFY2RieUowaFg0SW5H
+            dmdxc1c1QmVXWDI5SUtxZXpwdlhKeFEKBOjPXhrk3wsqDfEr33If5ixOIZmHecdz
+            4HIyvOaDVbm5RT2K6V69nEEHHB2lVJ3qnBTW9pi3F+OUgnonMlrO7A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-03-05T16:31:55Z"
+    mac: ENC[AES256_GCM,data:QHL6+h+o7j752AgfVgVNG+rVt1Z5WVGLw3p2y/91hlmMN+YNwWtwodvVd2GYhNV+i4fpKA7MQoK38bisT+LPgRjDCNfL4wS5X5W+HMFDN3v/2I8GLhBEk7SGWkFvrElqlGt2p6UvgC5nLfbxriOfH2V/hCXhTqnK17gIslUQhMg=,iv:PFj5U9nN/vDwScxZ0NhqRN2RCrbqjJZQJAogPXjLos0=,tag:oOWYLZVQvwL1OYwTM/wJtQ==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.12.0

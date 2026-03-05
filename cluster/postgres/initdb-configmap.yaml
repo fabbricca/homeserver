@@ -1,23 +1,33 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: postgres-initdb
-  namespace: postgres
-  labels:
-    app.kubernetes.io/name: postgres
-    app.kubernetes.io/component: database
+    name: postgres-initdb
+    namespace: postgres
+    labels:
+        app.kubernetes.io/name: postgres
+        app.kubernetes.io/component: database
 data:
-  # Runs automatically on first container start (docker-entrypoint-initdb.d).
-  # Add one file per tenant platform, prefixed numerically for ordering.
-  #
-  # studybuddy tenant:
-  #   - dedicated DB owner user
-  #   - dedicated database
-  #   - pgvector extension (required by the RAG worker)
-  #   - full schema ownership (no need for superuser in app queries)
-  01-studybuddy.sql: |
-    CREATE USER studybuddy_app WITH PASSWORD 'CHANGE_ME_studybuddy_db_password';
-    CREATE DATABASE studybuddy OWNER studybuddy_app;
-    \connect studybuddy
-    CREATE EXTENSION IF NOT EXISTS vector;
-    GRANT ALL ON SCHEMA public TO studybuddy_app;
+    #ENC[AES256_GCM,data:rb/4NCC18IPV+bDWbQdjDZzvTPU9I1yt4bB54rBc3B1N9HegGmNnFIpKi4jfhyHhsLq7nbDDCfvrn9ueBf/Ki/Ip66r51PWCJrA=,iv:CI5mfHGQLY7k4PybESr3OBnFIk9GZsYL/DaoY4t2V+U=,tag:KBpWgsrQimQbOrzqcUGyZg==,type:comment]
+    #ENC[AES256_GCM,data:6fNwZwZQiOtbEg1O77m/vrTs3+wA34vprrv4OxgZKEiV9AH//Vi2HI8pob/iWrEzMLIOSmecy61Qw8xCP1I5LW/fTK0o,iv:sHYUcT6xJFX40RUH72n2aCuNRszqj3gmGQ2WpCYSICU=,tag:CHs8E3erf3gckAnQNEtlMw==,type:comment]
+    #
+    #ENC[AES256_GCM,data:hbWRVayHWUlJ57LkAAqHJpiAvA==,iv:kY/Y1Jvza7oBKDC+tUS78GftDVqQonEIZf+ziKfWgRY=,tag:tbV+9RcZXgM1V7gsdYUoqA==,type:comment]
+    #ENC[AES256_GCM,data:5qx2JkX1/EJyFt5oQBdHAUJ5UYApgFFsGs1XPA==,iv:zipWrewR+Fu2dxyn8G2oblQMYX+xMTd246rkiJWrSZ4=,tag:X1Gvopf4O2Gc7nmQJeXRxg==,type:comment]
+    #ENC[AES256_GCM,data:Zv8EU0E6ZiLKKsqtULjbHiNxqvWFyLQ=,iv:Ks0WTMPmlvQhlHBZocLjlYGsDYxOur2krohvpELK1BI=,tag:/Pe5ARnE90KKM+a0/iF3fA==,type:comment]
+    #ENC[AES256_GCM,data:lhizv/z4/wXSos7A/vqO9aCLZttG0PTQM7T4HLOlPN1OKj/tUhYwYbXQY0wGGFeXsnIuEw==,iv:d/3XUsZ2WB44h8fima53LNMdVD17xhzIgavgRAbXvP0=,tag:/SQ+4pz75FywmqpZq2NCog==,type:comment]
+    #ENC[AES256_GCM,data:zaWv5WoRF9jRD8MQ7lw41By+1TV/I2Kf8B7zKfejc83TojOG/XQbt5UvfXQdN7NgEZKfebhwn7YxkDmidWMhzEg=,iv:fdazooRzmdbr+P1MGzGAKUO6gk+6bf7FVg1sWhruQVE=,tag:zonVTim9K5hEKP6Ml5x+Rw==,type:comment]
+    01-studybuddy.sql: ENC[AES256_GCM,data:3V2U3vX8+Wi34htV/BTJ0qLOYHRcotYRU4Jpo64rvx+i5dlHGLcshHJxgKQSGqaoraJuE/hBmamMI9sD6HZXX55wDjuv7S2vP2YJeJuxy+U4FiWWwKqpOaGDg/+1603oAaVzSNFeAo7hQFHEH83ooajis1Dc34nsvrT1/f55Lza9LzGFxOWoI9h+TUUuT6niQvt6WYhJ6lMVAVCdvCNAYlfiLxCtrFFfjpYb+NoJBAgNS37MnX/HhzCt2Rv83/ep2LHuoiHxpr2YKMWAVcMpMdisCg==,iv:fc705yWG9TIdzPcIN/AKv4K74qGbp4M0VIPsNsOgO4I=,tag:rEWztGNGDU3LnKneJBGnLw==,type:str]
+sops:
+    age:
+        - recipient: age1n39wyrdgfj9ta5s7fwj786d4jjjhc90aw7f2ffqsmg794vme6swqtd9jca
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrZzQzWTdIQTFFeHRKaXNL
+            N2VBc3grdVY1RVQyRjMrdjdLemQ2azFzTWpvCjlZUVgxTXhLNytoL1B0QlFtZHlJ
+            MFd3RXJKc1cxSWNhYVdkQURJc3RvMzgKLS0tIGlrVHI2bzNoVy9Rb3JJUW9IUjY5
+            QWdrWFFUNGZ5aUE3YTZSVFVnclVVNGMKd2atn4qwBbCfxhCoGPvbm8FQnJu/lW9n
+            SwXhyXhXl4Nd7LYc1bt3LLtebvKv+W+eJZ1cjztKBeq3Nt6nmO+mtw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-03-05T16:31:16Z"
+    mac: ENC[AES256_GCM,data:7ZjLCJoeUtYDjN+hfr0abq0jlwxHyP2uxt0rXKWCUdVjpH5IAdG/s3RofJEW5XNWCD/nzMqwLHalPAwg7iIHDMxxbpTzls7yDZxinYdZkqyd8nrYus+/nob/drL0HtmQ+7dJXJiQIBtLHTkHrNtBIfZmUkE6+f9e5nTiGp9PozY=,iv:Gg30VlEHsUcXkVxntLP4HxtUBM+pMl01gOVsitHquTE=,tag:WJiejSoH4NiAz05CXPp8Kw==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.12.0
