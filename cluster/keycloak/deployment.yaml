@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  namespace: keycloak
+  labels:
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/component: auth
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: keycloak
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: keycloak
+        app.kubernetes.io/component: auth
+    spec:
+      containers:
+        - name: keycloak
+          # Custom image that bundles realm JSON files and themes.
+          # Build & push:
+          #   docker build -t fabbricca/keycloak:latest ./keycloak
+          #   docker push fabbricca/keycloak:latest
+          #
+          # Currently bundles: studybuddy realm (studybuddy-realm.json)
+          # To add a new platform: add its realm JSON to keycloak/realms/ in the image.
+          #
+          # IMPORTANT: Before first deploy, ensure realm JSON redirect URIs are set
+          # to production values, e.g. for studybuddy-web client:
+          #   "redirectUris": ["https://studybuddy.iberu.me/*"]
+          #   "webOrigins": ["https://studybuddy.iberu.me"]
+          image: fabbricca/studybuddy-keycloak:latest
+          imagePullPolicy: Always
+          command: ["/opt/keycloak/bin/kc.sh"]
+          args: ["start-dev", "--import-realm"]
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: KC_HOSTNAME_STRICT
+              value: "false"
+            - name: KC_HTTP_ENABLED
+              value: "true"
+            # nginx ingress does TLS termination; Keycloak runs HTTP behind it.
+            # KC_PROXY=edge tells Keycloak to trust X-Forwarded-Proto from nginx so
+            # it generates correct https:// issuer URLs in tokens.
+            - name: KC_PROXY
+              value: "edge"
+          envFrom:
+            - secretRef:
+                name: keycloak-secret
+          volumeMounts:
+            # Mount only the H2 subdirectory so /data/import (realm files from image) stays intact
+            - name: keycloak-data
+              mountPath: /opt/keycloak/data/h2
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "200m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 10
+            failureThreshold: 5
+      volumes:
+        - name: keycloak-data
+          persistentVolumeClaim:
+            claimName: keycloak-data

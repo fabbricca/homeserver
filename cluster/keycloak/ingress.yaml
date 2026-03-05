@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keycloak-ingress
+  namespace: keycloak
+  labels:
+    app.kubernetes.io/name: keycloak
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    # KC_PROXY=edge (set in deployment) tells Keycloak to trust X-Forwarded-Proto
+    # from nginx so it generates correct https:// issuer URLs in tokens.
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - keycloak.iberu.me
+      secretName: keycloak-tls
+  rules:
+    - host: keycloak.iberu.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  number: 8080
