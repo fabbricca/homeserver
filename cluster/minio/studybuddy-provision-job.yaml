@@ -1,0 +1,78 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: minio-provision-studybuddy
+  namespace: minio
+  labels:
+    app.kubernetes.io/name: minio
+    app.kubernetes.io/component: provisioning
+  annotations:
+    # Re-run this job manually if you need to re-provision:
+    #   kubectl delete job minio-provision-studybuddy -n minio
+    # Flux will recreate it on the next reconcile.
+spec:
+  backoffLimit: 5
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: mc
+          image: minio/mc:latest
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              set -e
+              # Wait for MinIO to be ready
+              until mc alias set minio http://minio:9000 "$MINIO_ROOT_USER" "$MINIO_ROOT_PASSWORD"; do
+                echo "Waiting for MinIO..."; sleep 5
+              done
+
+              # Create the studybuddy bucket (idempotent)
+              mc mb --ignore-existing minio/studybuddy
+
+              # Create the studybuddy IAM user (idempotent – fails silently if exists)
+              mc admin user add minio "$MINIO_STUDYBUDDY_ACCESS_KEY" "$MINIO_STUDYBUDDY_SECRET_KEY" 2>/dev/null || true
+
+              # Create a bucket-scoped policy
+              cat > /tmp/studybuddy-policy.json << 'EOF'
+              {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": ["s3:*"],
+                    "Resource": [
+                      "arn:aws:s3:::studybuddy",
+                      "arn:aws:s3:::studybuddy/*"
+                    ]
+                  }
+                ]
+              }
+              EOF
+
+              mc admin policy create minio studybuddy-policy /tmp/studybuddy-policy.json 2>/dev/null || true
+              mc admin policy attach minio studybuddy-policy --user "$MINIO_STUDYBUDDY_ACCESS_KEY"
+
+              echo "studybuddy MinIO provisioning complete."
+          env:
+            - name: MINIO_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_ROOT_USER
+            - name: MINIO_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_ROOT_PASSWORD
+            - name: MINIO_STUDYBUDDY_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-studybuddy-provision
+                  key: MINIO_STUDYBUDDY_ACCESS_KEY
+            - name: MINIO_STUDYBUDDY_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-studybuddy-provision
+                  key: MINIO_STUDYBUDDY_SECRET_KEY

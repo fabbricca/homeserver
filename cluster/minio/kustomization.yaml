@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: minio
+# Shared MinIO S3-compatible object storage.
+# Tenant isolation is done at the bucket + IAM user level:
+#   each platform gets its own bucket and a dedicated IAM user scoped to that bucket.
+# See studybuddy-provision-job.yaml for the studybuddy provisioning example.
+resources:
+  - pvc.yaml
+  - secret.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+  # Per-tenant provisioning jobs (run once after MinIO is ready):
+  - studybuddy-provision-secret.yaml
+  - studybuddy-provision-job.yaml
+commonLabels:
+  app.kubernetes.io/managed-by: flux

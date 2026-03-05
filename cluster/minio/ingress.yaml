@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio-ingress
+  namespace: minio
+  labels:
+    app.kubernetes.io/name: minio
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    # MinIO presigned URLs are generated with MINIO_USE_SSL=false (HTTP scheme) in apps.
+    # Signatures validate on host only (not scheme), so Pangolin's HTTPS termination
+    # at the edge is transparent to MinIO's validation.
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - minio.iberu.me
+        - minio-console.iberu.me
+      secretName: minio-tls
+  rules:
+    # S3-compatible API (used by apps)
+    - host: minio.iberu.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9000
+    # Web admin console
+    - host: minio-console.iberu.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9001
