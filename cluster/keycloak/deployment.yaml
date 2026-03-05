@@ -43,6 +43,9 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+            - name: management
+              containerPort: 9000
+              protocol: TCP
           env:
             - name: KC_HOSTNAME_STRICT
               value: "false"
@@ -69,8 +72,8 @@ spec:
               cpu: "1000m"
           livenessProbe:
             httpGet:
-              path: /health
-              port: http
+              path: /health/live
+              port: management
             initialDelaySeconds: 240
             periodSeconds: 30
             timeoutSeconds: 10
@@ -78,7 +81,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /health/ready
-              port: http
+              port: management
             initialDelaySeconds: 180
             periodSeconds: 15
             timeoutSeconds: 10
