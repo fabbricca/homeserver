@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-initdb
+  namespace: postgres
+  labels:
+    app.kubernetes.io/name: postgres
+    app.kubernetes.io/component: database
+data:
+  # Runs automatically on first container start (docker-entrypoint-initdb.d).
+  # Add one file per tenant platform, prefixed numerically for ordering.
+  #
+  # studybuddy tenant:
+  #   - dedicated DB owner user
+  #   - dedicated database
+  #   - pgvector extension (required by the RAG worker)
+  #   - full schema ownership (no need for superuser in app queries)
+  01-studybuddy.sql: |
+    CREATE USER studybuddy_app WITH PASSWORD 'CHANGE_ME_studybuddy_db_password';
+    CREATE DATABASE studybuddy OWNER studybuddy_app;
+    \connect studybuddy
+    CREATE EXTENSION IF NOT EXISTS vector;
+    GRANT ALL ON SCHEMA public TO studybuddy_app;
