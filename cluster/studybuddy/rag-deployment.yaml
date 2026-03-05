@@ -53,8 +53,9 @@ spec:
                   key: MINIO_SECRET_KEY
             - name: MINIO_BUCKET
               value: "studybuddy"
-            - name: DATABASE_URL
-              value: "postgresql://studybuddy_app:CHANGE_ME_studybuddy_db_password@postgres.postgres.svc.cluster.local:5432/studybuddy"
+          envFrom:
+            - configMapRef:
+                name: studybuddy-api-config
           resources:
             requests:
               cpu: 100m

@@ -36,13 +36,14 @@ spec:
               drop:
                 - ALL
             readOnlyRootFilesystem: false
+          envFrom:
+            - configMapRef:
+                name: studybuddy-api-config
           env:
             - name: NATS_URL
               value: "nats://studybuddy-nats:4222"
             - name: NODE_ENV
               value: "production"
-            - name: DATABASE_URL
-              value: "postgresql://studybuddy_app:CHANGE_ME_studybuddy_db_password@postgres.postgres.svc.cluster.local:5432/studybuddy"
           resources:
             requests:
               cpu: 25m
