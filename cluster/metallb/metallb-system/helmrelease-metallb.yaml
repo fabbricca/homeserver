@@ -4,6 +4,7 @@ metadata:
   name: metallb
   namespace: metallb-system
 spec:
+  suspend: true # upgrade failed with context deadline exceeded; metallb is deployed and functioning
   chart:
     spec:
       chart: metallb
