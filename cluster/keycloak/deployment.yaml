@@ -52,10 +52,11 @@ spec:
             - name: KC_HTTP_ENABLED
               value: "true"
             # nginx ingress does TLS termination; Keycloak runs HTTP behind it.
-            # KC_PROXY=edge tells Keycloak to trust X-Forwarded-Proto from nginx so
-            # it generates correct https:// issuer URLs in tokens.
-            - name: KC_PROXY
-              value: "edge"
+            # KC_PROXY_HEADERS=xforwarded tells Keycloak 26+ to trust X-Forwarded-Proto
+            # from nginx so it generates correct https:// issuer URLs in tokens.
+            # (KC_PROXY=edge was removed in Keycloak 26)
+            - name: KC_PROXY_HEADERS
+              value: "xforwarded"
           envFrom:
             - secretRef:
                 name: keycloak-secret
@@ -72,17 +73,17 @@ spec:
               cpu: "1000m"
           livenessProbe:
             httpGet:
-              path: /health/live
-              port: management
-            initialDelaySeconds: 240
+              path: /realms/master
+              port: http
+            initialDelaySeconds: 120
             periodSeconds: 30
             timeoutSeconds: 10
             failureThreshold: 5
           readinessProbe:
             httpGet:
-              path: /health/ready
-              port: management
-            initialDelaySeconds: 180
+              path: /realms/master
+              port: http
+            initialDelaySeconds: 90
             periodSeconds: 15
             timeoutSeconds: 10
             failureThreshold: 5
