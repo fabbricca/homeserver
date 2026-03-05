@@ -19,6 +19,8 @@ spec:
         app.kubernetes.io/name: keycloak
         app.kubernetes.io/component: auth
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: keycloak
           # Custom image that bundles realm JSON files and themes.
