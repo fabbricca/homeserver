@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studybuddy-api
+  namespace: studybuddy
+  labels:
+    app.kubernetes.io/name: studybuddy-api
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: studybuddy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: studybuddy-api
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: studybuddy-api
+        app.kubernetes.io/component: api
+        app.kubernetes.io/part-of: studybuddy
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: studybuddy-api
+          # Build from services/api/Dockerfile (monorepo context):
+          #   docker build -t fabbricca/studybuddy-api:latest -f services/api/Dockerfile .
+          #   docker push fabbricca/studybuddy-api:latest
+          image: fabbricca/studybuddy-api:latest
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: false
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: studybuddy-api-config
+            - secretRef:
+                name: studybuddy-api-secret
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+      restartPolicy: Always

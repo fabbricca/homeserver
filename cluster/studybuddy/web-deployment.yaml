@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studybuddy-web
+  namespace: studybuddy
+  labels:
+    app.kubernetes.io/name: studybuddy-web
+    app.kubernetes.io/component: web
+    app.kubernetes.io/part-of: studybuddy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: studybuddy-web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: studybuddy-web
+        app.kubernetes.io/component: web
+        app.kubernetes.io/part-of: studybuddy
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: studybuddy-web
+          # React/Vite SPA frontend.
+          #
+          # NOTE: services/web/Dockerfile is a DEVELOPMENT Dockerfile (Vite dev server, port 5173).
+          # For production you should create a multi-stage Dockerfile that:
+          #   1. Builds with: VITE_API_BASE_URL, VITE_KEYCLOAK_URL, VITE_KEYCLOAK_REALM, VITE_KEYCLOAK_CLIENT_ID
+          #   2. Serves the dist/ output with nginx (port 80)
+          #
+          # The image below assumes a production build. If using the dev Dockerfile, change
+          # containerPort and the service targetPort to 5173.
+          #
+          # Build example (production multi-stage):
+          #   docker build -t fabbricca/studybuddy-web:latest \
+          #     --build-arg VITE_API_BASE_URL=https://studybuddy.iberu.me \
+          #     --build-arg VITE_KEYCLOAK_URL=https://keycloak.studybuddy.iberu.me \
+          #     --build-arg VITE_KEYCLOAK_REALM=studybuddy \
+          #     --build-arg VITE_KEYCLOAK_CLIENT_ID=studybuddy-web \
+          #     -f services/web/Dockerfile.prod .
+          image: fabbricca/studybuddy-web:latest
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      restartPolicy: Always

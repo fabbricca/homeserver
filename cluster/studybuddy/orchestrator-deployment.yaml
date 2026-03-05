@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studybuddy-orchestrator
+  namespace: studybuddy
+  labels:
+    app.kubernetes.io/name: studybuddy-orchestrator
+    app.kubernetes.io/component: orchestrator
+    app.kubernetes.io/part-of: studybuddy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: studybuddy-orchestrator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: studybuddy-orchestrator
+        app.kubernetes.io/component: orchestrator
+        app.kubernetes.io/part-of: studybuddy
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: studybuddy-orchestrator
+          # Event-to-command router – pure NATS consumer, no HTTP port
+          # Build: docker build -t fabbricca/studybuddy-orchestrator:latest -f services/orchestrator/Dockerfile .
+          image: fabbricca/studybuddy-orchestrator:latest
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: false
+          env:
+            - name: NATS_URL
+              value: "nats://studybuddy-nats:4222"
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+      restartPolicy: Always

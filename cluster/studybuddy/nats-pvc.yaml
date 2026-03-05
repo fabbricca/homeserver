@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: studybuddy-nats-data
+  namespace: studybuddy
+  labels:
+    app.kubernetes.io/name: studybuddy-nats
+    app.kubernetes.io/component: messaging
+    app.kubernetes.io/part-of: studybuddy
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nfs-csi
+  resources:
+    requests:
+      storage: 5Gi

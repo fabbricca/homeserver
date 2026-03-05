@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: studybuddy-api-config
+  namespace: studybuddy
+  labels:
+    app.kubernetes.io/name: studybuddy-api
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: studybuddy
+data:
+  NODE_ENV: "production"
+  PORT: "3000"
+  LOG_LEVEL: "info"
+
+  # Database (PostgreSQL + pgvector) – shared instance, studybuddy-scoped user + DB
+  # DB and user are provisioned by cluster/postgres/initdb-configmap.yaml (01-studybuddy.sql)
+  DATABASE_URL: "postgresql://studybuddy_app:CHANGE_ME_studybuddy_db_password@postgres.postgres.svc.cluster.local:5432/studybuddy"
+
+  # NATS JetStream – studybuddy-internal event bus (same namespace)
+  NATS_URL: "nats://studybuddy-nats:4222"
+
+  # MinIO object storage – shared instance, studybuddy-scoped bucket + IAM user
+  # Bucket and IAM user are provisioned by cluster/minio/studybuddy-provision-job.yaml
+  MINIO_ENDPOINT: "minio.minio.svc.cluster.local"
+  MINIO_PORT: "9000"
+  MINIO_USE_SSL: "false"
+  MINIO_BUCKET: "studybuddy"
+  # Public presigned URL base. MINIO_USE_SSL=false so the SDK generates http:// URLs.
+  # Pangolin (the internet-facing edge proxy on the Oracle VM) upgrades connections to
+  # HTTPS, and MinIO signature validation is host-based (not scheme-based), so this works.
+  # Register minio.iberu.me in Pangolin's admin UI pointing to the Newt tunnel.
+  MINIO_PUBLIC_HOST: "minio.iberu.me"
+  MINIO_PUBLIC_PORT: "80"
+
+  # Keycloak auth – shared instance, studybuddy realm
+  # Realm is imported at startup from the image (keycloak/studybuddy-realm.json).
+  # Internal JWKS call uses cluster-local DNS; issuer validation uses the public URL.
+  KEYCLOAK_JWKS_URI: "http://keycloak.keycloak.svc.cluster.local:8080/realms/studybuddy/protocol/openid-connect/certs"
+  KEYCLOAK_ISSUER: "https://keycloak.iberu.me/realms/studybuddy"
+
+  # Ollama – GPU server shared with other platforms (same host as cognitia)
+  # Model: phi4-reasoning-plus (verify exact Ollama tag: `ollama list` on 10.0.0.15)
+  OLLAMA_BASE_URL: "http://10.0.0.15:11434"
+  OLLAMA_MODEL: "phi4-reasoning-plus"

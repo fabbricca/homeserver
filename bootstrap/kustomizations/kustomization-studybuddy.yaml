@@ -1,0 +1,40 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: studybuddy
+  namespace: flux-system
+spec:
+  interval: 3m
+  path: cluster/studybuddy
+  prune: true
+  timeout: 10m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  # Shared infrastructure must be healthy before studybuddy services start
+  dependsOn:
+    - name: postgres
+      namespace: flux-system
+    - name: minio
+      namespace: flux-system
+    - name: keycloak
+      namespace: flux-system
+    - name: ingress-nginx
+      namespace: flux-system
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: studybuddy-nats
+      namespace: studybuddy
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: studybuddy-api
+      namespace: studybuddy
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: studybuddy-web
+      namespace: studybuddy

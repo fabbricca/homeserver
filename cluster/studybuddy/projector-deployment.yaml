@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studybuddy-projector
+  namespace: studybuddy
+  labels:
+    app.kubernetes.io/name: studybuddy-projector
+    app.kubernetes.io/component: projector
+    app.kubernetes.io/part-of: studybuddy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: studybuddy-projector
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: studybuddy-projector
+        app.kubernetes.io/component: projector
+        app.kubernetes.io/part-of: studybuddy
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: studybuddy-projector
+          # Event projector – writes all evt.* events to Postgres, no HTTP port
+          # Build: docker build -t fabbricca/studybuddy-projector:latest -f services/projector/Dockerfile .
+          image: fabbricca/studybuddy-projector:latest
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: false
+          env:
+            - name: NATS_URL
+              value: "nats://studybuddy-nats:4222"
+            - name: NODE_ENV
+              value: "production"
+            - name: DATABASE_URL
+              value: "postgresql://studybuddy_app:CHANGE_ME_studybuddy_db_password@postgres.postgres.svc.cluster.local:5432/studybuddy"
+          resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+      restartPolicy: Always
