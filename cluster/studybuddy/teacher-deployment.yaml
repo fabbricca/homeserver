@@ -31,7 +31,7 @@ spec:
             - name: OLLAMA_BASE_URL
               value: "http://10.0.0.15:11434"
             - name: OLLAMA_MODEL
-              value: "phi4-reasoning-plus"
+              value: "phi4-reasoning:plus"
             - name: DATABASE_URL
               value: "postgresql://studybuddy_app:CHANGE_ME_studybuddy_db_password@postgres.postgres.svc.cluster.local:5432/studybuddy"
           resources:

@@ -31,7 +31,7 @@ spec:
             - name: OLLAMA_BASE_URL
               value: "http://10.0.0.15:11434"
             - name: OLLAMA_MODEL
-              value: "phi4-reasoning-plus"
+              value: "phi4-reasoning:plus"
           envFrom:
             - configMapRef:
                 name: studybuddy-api-config

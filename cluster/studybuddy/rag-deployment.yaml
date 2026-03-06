@@ -36,7 +36,7 @@ spec:
             - name: OLLAMA_BASE_URL
               value: "http://10.0.0.15:11434"
             - name: OLLAMA_MODEL
-              value: "phi4-reasoning-plus"
+              value: "phi4-reasoning:plus"
             - name: MINIO_ENDPOINT
               value: "minio.minio.svc.cluster.local"
             - name: MINIO_PORT
