@@ -25,6 +25,11 @@ spec:
           # Build: docker build -t fabbricca/studybuddy-teacher:latest -f workers/teacher/Dockerfile .
           image: fabbricca/studybuddy-teacher:latest
           imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: studybuddy-api-config
+            - secretRef:
+                name: studybuddy-api-secret
           env:
             - name: NATS_URL
               value: "nats://studybuddy-nats:4222"
@@ -32,8 +37,6 @@ spec:
               value: "http://10.0.0.15:11434"
             - name: OLLAMA_MODEL
               value: "phi4-reasoning:plus"
-            - name: DATABASE_URL
-              value: "postgresql://studybuddy_app:CHANGE_ME_studybuddy_db_password@postgres.postgres.svc.cluster.local:5432/studybuddy"
           resources:
             requests:
               cpu: 50m
