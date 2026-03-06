@@ -28,7 +28,7 @@ resources:
   - orchestrator-deployment.yaml
   - projector-deployment.yaml
   # Python AI workers (NATS consumers, Ollama GPU at 10.0.0.15)
-  # NOTE: Ollama needs both phi4-reasoning-plus AND nomic-embed-text loaded
+  # NOTE: Ollama needs both gemma3:12b AND nomic-embed-text loaded
   - rag-deployment.yaml
   - planner-deployment.yaml
   - teacher-deployment.yaml
