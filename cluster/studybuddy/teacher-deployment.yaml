@@ -14,6 +14,8 @@ spec:
       app.kubernetes.io/name: studybuddy-teacher
   template:
     metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2026-03-09T00:00:00Z"
       labels:
         app.kubernetes.io/name: studybuddy-teacher
         app.kubernetes.io/component: worker
