@@ -36,7 +36,7 @@ data:
     #ENC[AES256_GCM,data:DREX9wy4DQsge8bDtvaw9RW5UTaNL6kLR7X7ais/TTm/8pL6/xPA/HDi+HJd3BYo/zFOoBpcf8TOf+UgytDjwHaQoohSC7NenuU=,iv:IyDKIHowbSgONSvASF3FvuuyY4ftx+eMEiRF7nsoeto=,tag:xzN59oqnAFFRVl6hvUvukQ==,type:comment]
     #ENC[AES256_GCM,data:GkxHFEcXqyl5Tnit14JlrXBTfigD4/3GC6bCzBcjQ8rKIyf+ZnoOfEYdf81rjs2jZoTtlgeIBkz8EAyBlka81BQbNfQZtyj6HkS6ZAS9Wj10,iv:xEm+IYF10UdzkTzy+CsUpppmFGeZOSm7XnZUul/T9Mw=,tag:5WInyJseEqBRlm4oNN/5QA==,type:comment]
     OLLAMA_BASE_URL: ENC[AES256_GCM,data:2nEYZioxG0gNx8TXWCEjn0RKSE2JSg==,iv:jcM2f/RzS/qB0f7CqLoeChtYagS3CvXROyI5ymxFkYY=,tag:+iVXRdG57/KrctR4GyZLFg==,type:str]
-    OLLAMA_MODEL: ENC[AES256_GCM,data:yQJUyJRYAGC0hw==,iv:ZwzXh1pWBiPm7TgRjps83WQbO3qqXXqFSJMVUQRrJjE=,tag:02+prZecvxh5EOLtRCMjdg==,type:str]
+    OLLAMA_MODEL: ENC[AES256_GCM,data:VV3MANOcWW5OAg==,iv:WSzSjGLX7lqaRUgOsurTtt/z90iS7EkpAPkFG27/Wbo=,tag:jS5DzcfltL2dFTTvWW9QkQ==,type:str]
 sops:
     age:
         - recipient: age1n39wyrdgfj9ta5s7fwj786d4jjjhc90aw7f2ffqsmg794vme6swqtd9jca
@@ -48,7 +48,7 @@ sops:
             anhUcmVKaG16cFRwNmRhYWY2aXFXNFEKEjjJILelmzELDAFcjtRheWwQ0fzvqobJ
             3E2UwpyVTBA6UDe0079ouSNgy3Cqc6xPyjcxKx5eZO/H68ZfFcyQZg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-03-06T11:47:15Z"
-    mac: ENC[AES256_GCM,data:zWO2X30U4WU2jEomqgfQbyuVKKAcpLWBBMshgpoBq6zU5qScHNCN7ywcc7AiqDdz4ubhxveTtK/iAYgh4Xs5jadDGUegLmOo1FGF6shQne/9uDvsMBfSsyeg4dBGjfKK81izun998EYZ3HgF/VjgfAzH4BlChPWQ37YAWYWqnFc=,iv:iQq3C+8I4LkJ/YVpdMRVu2hhxSL9F6edHhqooTVlWWk=,tag:9ZzzU80ZNwJy/KSY5If6Ug==,type:str]
+    lastmodified: "2026-03-10T16:07:53Z"
+    mac: ENC[AES256_GCM,data:EMfXxK0joQPFeeyGc/QvlHI1rfO57NeXwauT+L2z3SWWuKaYIjUS+dJ4aoUabLaaB+HAsQBVg3l2rM9l4tmieExJfcHFuYbWdOHgPFW4174pnu9VE4LOi3CQhgp7Gn4jVDAzIZsIRduy0aIwXTTvLLNlHOCktyBvFV7CjgjqjqQ=,iv:x5SZJLRuui1Y+m+YEx+1WpFvkK4DlGm6FR8vpZC/p7I=,tag:mwnbq4CArGqHhg1ZIktSoA==,type:str]
     encrypted_regex: ^(data|stringData)$
     version: 3.12.0
