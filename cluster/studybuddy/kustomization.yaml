@@ -19,6 +19,8 @@ resources:
   - nats-pvc.yaml
   - nats-deployment.yaml
   - nats-service.yaml
+  # DB migrations (idempotent – delete job to re-run)
+  - migrate-0003-job.yaml
   # API (Fastify)
   - api-configmap.yaml
   - api-secret.yaml
