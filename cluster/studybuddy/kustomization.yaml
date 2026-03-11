@@ -22,13 +22,14 @@ resources:
   # API (Fastify)
   - api-configmap.yaml
   - api-secret.yaml
+  - groq-secret.yaml
   - api-deployment.yaml
   - api-service.yaml
   # Node.js services (no HTTP port – NATS consumers only)
   - orchestrator-deployment.yaml
   - projector-deployment.yaml
-  # Python AI workers (NATS consumers, Ollama GPU at 10.0.0.15)
-  # NOTE: Ollama needs both gemma3:12b AND nomic-embed-text loaded
+  # Python AI workers (NATS consumers, Ollama GPU at 10.0.0.15, Groq LLM)
+  # NOTE: Ollama needs gemma3:12b AND mxbai-embed-large loaded
   - rag-deployment.yaml
   - planner-deployment.yaml
   - teacher-deployment.yaml

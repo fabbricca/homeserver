@@ -32,6 +32,8 @@ spec:
                 name: studybuddy-api-config
             - secretRef:
                 name: studybuddy-api-secret
+            - secretRef:
+                name: studybuddy-groq-secret
           env:
             - name: NATS_URL
               value: "nats://studybuddy-nats:4222"
@@ -39,6 +41,14 @@ spec:
               value: "http://10.0.0.15:11434"
             - name: OLLAMA_MODEL
               value: "gemma3:12b"
+            - name: LLM_PROVIDER
+              value: "groq"
+            - name: LLM_BASE_URL
+              value: "https://api.groq.com/openai/v1"
+            - name: LLM_MODEL
+              value: "llama-3.3-70b-versatile"
+            - name: EMBED_MODEL
+              value: "mxbai-embed-large"
           resources:
             requests:
               cpu: 50m

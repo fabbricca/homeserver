@@ -44,11 +44,20 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
+          env:
+            - name: LLM_PROVIDER
+              value: "groq"
+            - name: LLM_BASE_URL
+              value: "https://api.groq.com/openai/v1"
+            - name: LLM_MODEL
+              value: "llama-3.3-70b-versatile"
           envFrom:
             - configMapRef:
                 name: studybuddy-api-config
             - secretRef:
                 name: studybuddy-api-secret
+            - secretRef:
+                name: studybuddy-groq-secret
           resources:
             requests:
               cpu: 100m

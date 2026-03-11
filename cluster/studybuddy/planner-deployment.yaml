@@ -34,9 +34,19 @@ spec:
               value: "http://10.0.0.15:11434"
             - name: OLLAMA_MODEL
               value: "gemma3:12b"
+            - name: LLM_PROVIDER
+              value: "groq"
+            - name: LLM_BASE_URL
+              value: "https://api.groq.com/openai/v1"
+            - name: LLM_MODEL
+              value: "llama-3.3-70b-versatile"
+            - name: EMBED_MODEL
+              value: "mxbai-embed-large"
           envFrom:
             - configMapRef:
                 name: studybuddy-api-config
+            - secretRef:
+                name: studybuddy-groq-secret
           resources:
             requests:
               cpu: 50m
