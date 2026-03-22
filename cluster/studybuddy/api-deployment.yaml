@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/restartedAt: "2026-03-21T00:00:00Z"
+        kubectl.kubernetes.io/restartedAt: "2026-03-22T00:00:00Z"
       labels:
         app.kubernetes.io/name: studybuddy-api
         app.kubernetes.io/component: api
