@@ -25,7 +25,7 @@ spec:
         - name: studybuddy-planner
           # Planner worker – generates structured study plans via LLM
           # Build: docker build -t fabbricca/studybuddy-planner:latest -f workers/planner/Dockerfile .
-          image: fabbricca/studybuddy-planner:latest
+          image: fabbricca/studybuddy-planner@sha256:c4fa9a9ea1dee0969281b9a152fa7e27ce0a3c726117d0e015efcec35a1608a6
           imagePullPolicy: Always
           env:
             - name: NATS_URL

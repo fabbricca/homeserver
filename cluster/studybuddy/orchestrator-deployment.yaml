@@ -30,7 +30,7 @@ spec:
         - name: studybuddy-orchestrator
           # Event-to-command router – pure NATS consumer, no HTTP port
           # Build: docker build -t fabbricca/studybuddy-orchestrator:latest -f services/orchestrator/Dockerfile .
-          image: fabbricca/studybuddy-orchestrator:latest
+          image: fabbricca/studybuddy-orchestrator@sha256:736bc014a924e6cf72f92f89c41b6d04e6d45e910ecd188d59e508bbd0aef107
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false

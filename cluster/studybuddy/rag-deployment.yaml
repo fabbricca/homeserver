@@ -30,7 +30,7 @@ spec:
           #   and Groq (or configurable LLM_PROVIDER) for summarization/topic extraction.
           #   - EMBED_MODEL (mxbai-embed-large): for vector embeddings (1024 dims)
           # Ensure the embedding model is pulled on the GPU server before deploying.
-          image: fabbricca/studybuddy-rag:latest
+          image: fabbricca/studybuddy-rag@sha256:358f34d5a974f19b8ed468555c99137d6ad9313fe888adc736033b16eebac513
           imagePullPolicy: Always
           env:
             - name: NATS_URL

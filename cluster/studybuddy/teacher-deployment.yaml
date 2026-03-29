@@ -25,7 +25,7 @@ spec:
         - name: studybuddy-teacher
           # Teacher worker – generates lesson content (intro, guide, checklist) via RAG + LLM
           # Build: docker build -t fabbricca/studybuddy-teacher:latest -f workers/teacher/Dockerfile .
-          image: fabbricca/studybuddy-teacher:latest
+          image: fabbricca/studybuddy-teacher@sha256:dc13c39ca96cdc104122edb685f105af1924280f28350066d4a31e9d3f61f8a2
           imagePullPolicy: Always
           envFrom:
             - configMapRef:
