@@ -43,7 +43,7 @@ spec:
           #     --build-arg VITE_KEYCLOAK_REALM=studybuddy \
           #     --build-arg VITE_KEYCLOAK_CLIENT_ID=studybuddy-web \
           #     -f services/web/Dockerfile.prod .
-          image: fabbricca/studybuddy-web:latest
+          image: fabbricca/studybuddy-web@sha256:06b6f5675c6eee299b891dc7b92757143b64f56839547ed481c95012eed46822
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
