@@ -32,7 +32,7 @@ spec:
           # Build from services/api/Dockerfile (monorepo context):
           #   docker build -t fabbricca/studybuddy-api:latest -f services/api/Dockerfile .
           #   docker push fabbricca/studybuddy-api:latest
-          image: fabbricca/studybuddy-api@sha256:afa2f911170d68db2fd9b165a0052403d9500a2708b032c2da7e62a7cd583cc1
+          image: fabbricca/studybuddy-api@sha256:8bd526a18ca6b7438ced124cb5ded63a4890be6eb8f7acc151604c52dfd1837b
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
