@@ -63,11 +63,14 @@ spec:
                   key: MINIO_SECRET_KEY
             - name: MINIO_BUCKET
               value: "studybuddy"
+            - name: RAG_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: studybuddy-groq-secret
+                  key: LLM_API_KEY
           envFrom:
             - configMapRef:
                 name: studybuddy-api-config
-            - secretRef:
-                name: studybuddy-groq-secret
           resources:
             requests:
               cpu: 100m

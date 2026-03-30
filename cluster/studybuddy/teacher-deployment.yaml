@@ -30,13 +30,14 @@ spec:
           envFrom:
             - configMapRef:
                 name: studybuddy-api-config
-            - secretRef:
-                name: studybuddy-api-secret
-            - secretRef:
-                name: studybuddy-groq-secret
           env:
             - name: NATS_URL
               value: "nats://studybuddy-nats:4222"
+            - name: TEACHER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: studybuddy-groq-secret
+                  key: LLM_API_KEY
             - name: OLLAMA_BASE_URL
               value: "http://10.0.0.15:11434"
             - name: OLLAMA_MODEL
