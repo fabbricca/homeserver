@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/restartedAt: "2026-03-30T17:42:04Z"
+        kubectl.kubernetes.io/restartedAt: "2026-03-30T18:56:16Z"
       labels:
         app.kubernetes.io/name: studybuddy-web
         app.kubernetes.io/component: web
@@ -43,7 +43,7 @@ spec:
           #     --build-arg VITE_KEYCLOAK_REALM=studybuddy \
           #     --build-arg VITE_KEYCLOAK_CLIENT_ID=studybuddy-web \
           #     -f services/web/Dockerfile.prod .
-          image: fabbricca/studybuddy-web@sha256:da7af8142f8cc3ad8783859c5c29f553f487376a5a6058c35adbad79503addc2
+          image: fabbricca/studybuddy-web@sha256:d927698acd85eca643cdb953e0a5fd6255a4081a1ae4a2c8a758ae20e562356c
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false

@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/restartedAt: "2026-03-30T17:42:04Z"
+        kubectl.kubernetes.io/restartedAt: "2026-03-30T18:56:16Z"
       labels:
         app.kubernetes.io/name: studybuddy-planner
         app.kubernetes.io/component: worker
@@ -25,7 +25,7 @@ spec:
         - name: studybuddy-planner
           # Planner worker – generates structured study plans via LLM
           # Build: docker build -t fabbricca/studybuddy-planner:latest -f workers/planner/Dockerfile .
-          image: fabbricca/studybuddy-planner@sha256:fee0e38dd8a35930b21d4f20807ff2047106661abe783f404f3488594551ece6
+          image: fabbricca/studybuddy-planner@sha256:2286973064e17e4ecc84b308a13be9c02f08011a5efe3658e15b92bca5c779e3
           imagePullPolicy: Always
           env:
             - name: NATS_URL

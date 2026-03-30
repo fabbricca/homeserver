@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/restartedAt: "2026-03-30T17:42:04Z"
+        kubectl.kubernetes.io/restartedAt: "2026-03-30T18:56:16Z"
       labels:
         app.kubernetes.io/name: studybuddy-projector
         app.kubernetes.io/component: projector
@@ -30,7 +30,7 @@ spec:
         - name: studybuddy-projector
           # Event projector – writes all evt.* events to Postgres, no HTTP port
           # Build: docker build -t fabbricca/studybuddy-projector:latest -f services/projector/Dockerfile .
-          image: fabbricca/studybuddy-projector@sha256:07c5cca09e1bfc70b75770e719ed791587fde307605839782ba32440b29bfc95
+          image: fabbricca/studybuddy-projector@sha256:d539551abb05addcac71d1ce2e2e40b805b59d8692e103e7c0cf75c2ea6f6b95
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false

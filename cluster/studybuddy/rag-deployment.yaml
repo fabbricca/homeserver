@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/restartedAt: "2026-03-30T17:42:04Z"
+        kubectl.kubernetes.io/restartedAt: "2026-03-30T18:56:16Z"
       labels:
         app.kubernetes.io/name: studybuddy-rag
         app.kubernetes.io/component: worker
@@ -30,7 +30,7 @@ spec:
           #   LLM calls (gemma3:12b for summarization/topic extraction).
           #   - EMBED_MODEL (mxbai-embed-large): for vector embeddings (1024 dims)
           # Ensure the embedding model is pulled on the GPU server before deploying.
-          image: fabbricca/studybuddy-rag@sha256:cf9471301d36c4d440486040a5f03649d000ddd6e9b5141138fa2610584eae12
+          image: fabbricca/studybuddy-rag@sha256:efe480cf6c4d6fc67b0b5ea472ae3a8707d8bc862f2b884159036f59076c748d
           imagePullPolicy: Always
           env:
             - name: NATS_URL
