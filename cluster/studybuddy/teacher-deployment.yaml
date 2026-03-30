@@ -33,21 +33,16 @@ spec:
           env:
             - name: NATS_URL
               value: "nats://studybuddy-nats:4222"
-            - name: TEACHER_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: studybuddy-groq-secret
-                  key: LLM_API_KEY
             - name: OLLAMA_BASE_URL
               value: "http://10.0.0.15:11434"
             - name: OLLAMA_MODEL
               value: "gemma3:12b"
             - name: LLM_PROVIDER
-              value: "groq"
+              value: "ollama"
             - name: LLM_BASE_URL
-              value: "https://api.groq.com/openai/v1"
+              value: "http://10.0.0.15:11434/v1"
             - name: LLM_MODEL
-              value: "llama-3.3-70b-versatile"
+              value: "gemma3:12b"
             - name: EMBED_MODEL
               value: "mxbai-embed-large"
           resources:

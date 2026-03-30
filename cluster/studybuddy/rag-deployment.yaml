@@ -26,8 +26,8 @@ spec:
           # RAG worker – extracts, chunks, embeds documents; stores vectors in pgvector
           # Build: docker build -t fabbricca/studybuddy-rag:latest -f workers/rag/Dockerfile .
           #
-          # IMPORTANT: This worker uses Ollama on 10.0.0.15 for embeddings
-          #   and Groq (or configurable LLM_PROVIDER) for summarization/topic extraction.
+          # IMPORTANT: This worker uses Ollama on 10.0.0.15 for both embeddings and
+          #   LLM calls (gemma3:12b for summarization/topic extraction).
           #   - EMBED_MODEL (mxbai-embed-large): for vector embeddings (1024 dims)
           # Ensure the embedding model is pulled on the GPU server before deploying.
           image: fabbricca/studybuddy-rag@sha256:358f34d5a974f19b8ed468555c99137d6ad9313fe888adc736033b16eebac513
@@ -40,11 +40,11 @@ spec:
             - name: OLLAMA_MODEL
               value: "gemma3:12b"
             - name: LLM_PROVIDER
-              value: "groq"
+              value: "ollama"
             - name: LLM_BASE_URL
-              value: "https://api.groq.com/openai/v1"
+              value: "http://10.0.0.15:11434/v1"
             - name: LLM_MODEL
-              value: "llama-3.3-70b-versatile"
+              value: "gemma3:12b"
             - name: EMBED_MODEL
               value: "mxbai-embed-large"
             - name: MINIO_ENDPOINT
@@ -63,11 +63,6 @@ spec:
                   key: MINIO_SECRET_KEY
             - name: MINIO_BUCKET
               value: "studybuddy"
-            - name: RAG_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: studybuddy-groq-secret
-                  key: LLM_API_KEY
           envFrom:
             - configMapRef:
                 name: studybuddy-api-config
