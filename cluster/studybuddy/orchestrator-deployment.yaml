@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/restartedAt: "2026-03-30T14:28:44Z"
+        kubectl.kubernetes.io/restartedAt: "2026-03-30T17:42:04Z"
       labels:
         app.kubernetes.io/name: studybuddy-orchestrator
         app.kubernetes.io/component: orchestrator
