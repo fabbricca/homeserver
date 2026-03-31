@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/restartedAt: "2026-03-30T18:56:16Z"
+        kubectl.kubernetes.io/restartedAt: "2026-03-31T19:18:35Z"
       labels:
         app.kubernetes.io/name: studybuddy-api
         app.kubernetes.io/component: api
@@ -32,7 +32,7 @@ spec:
           # Build from services/api/Dockerfile (monorepo context):
           #   docker build -t fabbricca/studybuddy-api:latest -f services/api/Dockerfile .
           #   docker push fabbricca/studybuddy-api:latest
-          image: fabbricca/studybuddy-api@sha256:09ec9ea35c5dbe20b930144aec6f16eb001127adef549007b26c2698c24084b9
+          image: fabbricca/studybuddy-api@sha256:302b5cf2b951940e2859f4210cd251e102bb69e42acfce23001811a8a2e28026
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false

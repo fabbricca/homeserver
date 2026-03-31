@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/restartedAt: "2026-03-30T18:56:16Z"
+        kubectl.kubernetes.io/restartedAt: "2026-03-31T19:18:35Z"
       labels:
         app.kubernetes.io/name: studybuddy-teacher
         app.kubernetes.io/component: worker
@@ -25,7 +25,7 @@ spec:
         - name: studybuddy-teacher
           # Teacher worker – generates lesson content (intro, guide, checklist) via RAG + LLM
           # Build: docker build -t fabbricca/studybuddy-teacher:latest -f workers/teacher/Dockerfile .
-          image: fabbricca/studybuddy-teacher@sha256:be48c44c0b0f75f8efe619f0d3f45880ec2e313a965245cd629f11c38af7c783
+          image: fabbricca/studybuddy-teacher@sha256:813903f2421fb34dfc6762de927bf617681aaa5cd6025afaafe8fa271f5f4e88
           imagePullPolicy: Always
           envFrom:
             - configMapRef:

@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/restartedAt: "2026-03-30T18:56:16Z"
+        kubectl.kubernetes.io/restartedAt: "2026-03-31T19:18:35Z"
       labels:
         app.kubernetes.io/name: studybuddy-orchestrator
         app.kubernetes.io/component: orchestrator
@@ -30,7 +30,7 @@ spec:
         - name: studybuddy-orchestrator
           # Event-to-command router – pure NATS consumer, no HTTP port
           # Build: docker build -t fabbricca/studybuddy-orchestrator:latest -f services/orchestrator/Dockerfile .
-          image: fabbricca/studybuddy-orchestrator@sha256:347846158e2fa0f171b7f6c0afe49123b10bc4167a849b40a7c33148bbb5d5bb
+          image: fabbricca/studybuddy-orchestrator@sha256:c6d3b54ea2f9cb574ebb0c4b9f31edebf49df7ac5fdbd10b4420b9064d08724d
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
