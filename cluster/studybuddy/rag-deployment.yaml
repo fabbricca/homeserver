@@ -30,7 +30,7 @@ spec:
           #   LLM calls (gemma3:12b for summarization/topic extraction).
           #   - EMBED_MODEL (mxbai-embed-large): for vector embeddings (1024 dims)
           # Ensure the embedding model is pulled on the GPU server before deploying.
-          image: fabbricca/studybuddy-rag@sha256:502d9784fe58e1e63df9c3355e84245f2f4971318cdcc712faead40554b18efd
+          image: fabbricca/studybuddy-rag@sha256:30fe5ee42a27775b07954c81fdecd17b7da6d376de0de59036995a9619b9b45f
           imagePullPolicy: Always
           env:
             - name: NATS_URL

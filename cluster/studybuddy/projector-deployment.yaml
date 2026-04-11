@@ -30,7 +30,7 @@ spec:
         - name: studybuddy-projector
           # Event projector – writes all evt.* events to Postgres, no HTTP port
           # Build: docker build -t fabbricca/studybuddy-projector:latest -f services/projector/Dockerfile .
-          image: fabbricca/studybuddy-projector@sha256:611d54b21bb12728722721f52377d63d7b725618ec70db7ecec94571b8e5b4bb
+          image: fabbricca/studybuddy-projector@sha256:6c67287596ec0ab57e9e1f7c92813624ceb81fbc64355b264a3bf75cf709dfbd
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
